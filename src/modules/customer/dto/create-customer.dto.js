@@ -17,7 +17,9 @@ export const CreateCustomerDto = Joi.object({
     }),
     email: Joi.string().required(),
     job: Joi.string().required(),
-    income: Joi.number().optional().default(0)
+    income: Joi.number().optional().default(0),
+    facebook: Joi.string().required(),
+    instagram: Joi.string().required()
 
 
 })

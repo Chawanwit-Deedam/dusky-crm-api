@@ -20,8 +20,8 @@ const CustomerController = {
 
     createCustomer: async (req, res) => {
         ///const id = req.body.id
-        const { username, password, profileImageUrl, firstName, lastName, sex, dateOfBirth, phoneNumber, address, email, job, income} = req.body
-        const created = await CustomerService.create({ username, password, profileImageUrl, firstName, lastName, sex, dateOfBirth, phoneNumber, address, email, job, income })
+        const { username, password, profileImageUrl, firstName, lastName, sex, dateOfBirth, phoneNumber, address, email, job, income, facebook, instagram} = req.body
+        const created = await CustomerService.create({ username, password, profileImageUrl, firstName, lastName, sex, dateOfBirth, phoneNumber, address, email, job, income, facebook, instagram })
     
         res.status(201).json({
             success: true,
@@ -30,8 +30,8 @@ const CustomerController = {
     },
     updateCustomer: async (req, res) =>{
         const { id } = req.params
-        const { username, password, profileImageUrl, firstName, lastName, sex, dateOfBirth, phoneNumber, address, email, job, income} = req.body
-        const updated = await CustomerService.updateOne(id, { username, password, profileImageUrl, firstName, lastName, sex, dateOfBirth, phoneNumber, address, email, job, income })
+        const { username, password, profileImageUrl, firstName, lastName, sex, dateOfBirth, phoneNumber, address, email, job, income, facebook, instagram} = req.body
+        const updated = await CustomerService.updateOne(id, { username, password, profileImageUrl, firstName, lastName, sex, dateOfBirth, phoneNumber, address, email, job, income, facebook, instagram })
         
         res.status(200).json({
             success: true,

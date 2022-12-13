@@ -67,6 +67,14 @@ const CustomerSchema = new Schema({
     income: {
         type: Number,
         required: true
+    },
+    facebook: {
+        type: String,
+        required: true
+    },
+    instagram: {
+        type: String,
+        required: true
     }
 
 
