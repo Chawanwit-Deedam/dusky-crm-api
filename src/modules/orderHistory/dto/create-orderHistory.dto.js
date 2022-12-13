@@ -2,8 +2,6 @@ import Joi from 'joi'
 
 export const CreateOrderHistoryDto = Joi.object({
     id: Joi.string().optional(),
-    orderPriceTotal: Joi.number().optional().default(0),
-    dateOfOrder: Joi.date().required(),
-    orderType: Joi.string().required()
+    orderPriceTotal: Joi.number().optional().default(0)
 
 })

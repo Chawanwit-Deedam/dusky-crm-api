@@ -20,8 +20,8 @@ const OrderHistoryController = {
 
     createOrderHistory: async (req, res) => {
         ///const id = req.body.id
-        const { orderPriceTotal, dateOfOrder, orderType } = req.body
-        const created = await OrderHistoryService.create({ orderPriceTotal, dateOfOrder, orderType})
+        const { orderPriceTotal } = req.body
+        const created = await OrderHistoryService.create({ orderPriceTotal })
     
         res.status(201).json({
             success: true,
@@ -30,8 +30,8 @@ const OrderHistoryController = {
     },
     updateOrderHistory: async (req, res) =>{
         const { id } = req.params
-        const { orderPriceTotal, dateOfOrder, orderType } = req.body
-        const updated = await OrderHistoryService.updateOne(id, { orderPriceTotal, dateOfOrder, orderType })
+        const { orderPriceTotal } = req.body
+        const updated = await OrderHistoryService.updateOne(id, { orderPriceTotal })
         
         res.status(200).json({
             success: true,

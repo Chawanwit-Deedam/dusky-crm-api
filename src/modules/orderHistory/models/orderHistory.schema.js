@@ -7,14 +7,6 @@ const OrderHistorySchema = new Schema({
     orderPriceTotal:{
         type: Number,
         required: true
-    },
-    dateOfOrder:{
-      type: Date,
-      required: true
-    },
-    orderType:{
-      type: String,
-      required: true
     }
 
 }, {timestamps: true })
