@@ -59,6 +59,14 @@ const CustomerSchema = new Schema({
     email:{
         type: String,
         required: true
+    }, 
+    job: {
+        type: String,
+        required: true
+    },
+    income: {
+        type: Number,
+        required: true
     }
 
 

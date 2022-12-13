@@ -16,5 +16,7 @@ export const UpdateCustomerDto = Joi.object({
     }),
     
     email: Joi.string().optional(),
+    job: Joi.string().required(),
+    income: Joi.number().optional().default(0)
 })
 

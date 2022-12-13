@@ -16,6 +16,8 @@ export const CreateCustomerDto = Joi.object({
         province: Joi.string().required(),
     }),
     email: Joi.string().required(),
+    job: Joi.string().required(),
+    income: Joi.number().optional().default(0)
 
 
 })
