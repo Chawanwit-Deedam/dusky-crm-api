@@ -3,24 +3,22 @@ import mongoose from '../../../common/database/mongoose.db.js'
 
 const { Schema, model} = mongoose
 
-const ProductSchema = new Schema({
-    productType:{
+const PromotionSchema = new Schema({
+    promotionModel:{
         type: String,
         required: true
     },
-    productName:{
-        type: String,
+    startDate:{
+        type: Date,
         required: true
     },
-    productPrice:{
-      type: String,
+    endDate:{
+      type: Date,
       required: true
   }
 
-
-
 }, {timestamps: true })
 
-const ProductModel = model('products', ProductSchema)
+const PromotionModel = model('promotions', PromotionSchema)
 
-export default ProductModel
+export default PromotionModel

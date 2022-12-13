@@ -12,7 +12,10 @@ const ProductService = {
     },
     updateOne: (id, payload) => {
         return ProductModel.findOneAndUpdate({ _id: id }, { $set: payload})
-    }
+    },
+    deleteOne:(id) => {
+        return ProductModel.deleteOne({_id: id})
+    } 
 }
 
 export default ProductService

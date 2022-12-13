@@ -20,8 +20,8 @@ const ProductController = {
 
     createProduct: async (req, res) => {
         ///const id = req.body.id
-        const { name, price} = req.body
-        const created = await ProductService.create({name, price})
+        const { productType, productName, productPrice } = req.body
+        const created = await ProductService.create({ productType, productName, productPrice })
     
         res.status(201).json({
             success: true,
@@ -30,13 +30,22 @@ const ProductController = {
     },
     updateProduct: async (req, res) =>{
         const { id } = req.params
-        const { name,price } = req.body
-        const updated = await ProductService.updateOne(id, { name, price})
+        const { productType, productName, productPrice } = req.body
+        const updated = await ProductService.updateOne(id, { productType, productName, productPrice })
         
         res.status(200).json({
             success: true,
             data: updated
         })
-    }
+    },
+    deleteProductById: async (req, res) => {
+        const { id } = req.body
+        const product = await ProductService.deleteOne(id)
+
+        res.status(200).json({
+            success: true,
+            data: product
+        })
+    },
 }
 export default ProductController
