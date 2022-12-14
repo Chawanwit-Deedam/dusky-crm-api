@@ -1,3 +1,4 @@
+import { query } from 'express'
 import CustomerModel from '../models/customer.schema.js'
 
 const CustomerService = {
@@ -7,6 +8,9 @@ const CustomerService = {
     getAll:(query = {}) => {
         return CustomerModel.find(query)
     },
+    getSome:(query = {}) => {
+        return CustomerModel.find({_id: {$in: query}})
+    },
     getOne:(id) => {
         return CustomerModel.findOne({ _id: id })
     },
@@ -15,7 +19,7 @@ const CustomerService = {
     },
     deleteOne:(id) => {
         return CustomerModel.deleteOne({_id: id})
-    } 
+    }
 }
 
 export default CustomerService
