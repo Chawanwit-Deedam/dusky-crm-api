@@ -1,1 +1,3 @@
-# projectDusky
+# install 
+npm install
+.env
