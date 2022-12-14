@@ -1,6 +1,5 @@
 import mongoose from '../../../common/database/mongoose.db.js'
 
-
 const { Schema, model} = mongoose
 
 const PromotionSchema = new Schema({

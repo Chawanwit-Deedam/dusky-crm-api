@@ -29,7 +29,6 @@ const ItemController = {
         })
     },
     updateItem: async (req, res) =>{
-        const { id } = req.params
         const { itemName, itemPrice, itemQuantity, itemType } = req.body
         const updated = await ItemService.updateOne(id, { itemName, itemPrice, itemQuantity, itemType })
         
