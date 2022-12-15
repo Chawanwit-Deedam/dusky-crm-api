@@ -1,4 +1,7 @@
 import OrderHistoryService from '../services/orderHistory.service.js'
+import CustomerService from '../../customer/services/customer.service.js'
+import OrderItemService from '../../orderItem/services/orderItem.service.js'
+
 const OrderHistoryController = {
     getOrderHistory: async (req, res) =>{
         const orderHistory = await OrderHistoryService.getAll()
@@ -20,8 +23,10 @@ const OrderHistoryController = {
 
     createOrderHistory: async (req, res) => {
         ///const id = req.body.id
-        const { item, orderPriceTotal } = req.body
-        const created = await OrderHistoryService.create({ item, orderPriceTotal })
+        const { idCustomer, idOrder, orderPriceTotal, dateOfbuy, deliveryStatus, idPromotion, payment } = req.body
+        const customer = await CustomerService.getOne( idCustomer )
+        const order = await OrderItemService.getOne( idOrder )
+        const created = await OrderHistoryService.create({ customer, order, orderPriceTotal, dateOfbuy, deliveryStatus, idPromotion, payment })
     
         res.status(201).json({
             success: true,

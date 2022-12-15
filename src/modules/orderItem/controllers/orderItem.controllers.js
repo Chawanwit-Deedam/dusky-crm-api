@@ -1,5 +1,6 @@
 import OrderItemService from "../services/orderItem.service.js"
 import CustomerService from "../../customer/services/customer.service.js"
+import ItemService from "../../item/services/item.service.js"
 const OrderItemController = {
     getOrderItem: async (req, res) =>{
         const orderitem = await OrderItemService.getAll()
@@ -25,8 +26,7 @@ const OrderItemController = {
         // const orderItem = await CustomerService.getOne(allitem)
         // const created = await OrderItemService.create({ orderItem, dateOforder })
         const { allitem, count } = req.body
-        const orderItem = await CustomerService.getSome(allitem)
-        
+        const orderItem = await ItemService.getSome(allitem)
         const created = await OrderItemService.create({ orderItem })
 
         

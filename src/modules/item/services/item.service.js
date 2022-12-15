@@ -1,11 +1,14 @@
 import ItemModel from '../models/item.schema.js'
 
 const ItemService = {
-    create: (id, payload) => {
-        return new ItemModel({ _id: id },(payload)).save()
+    create: (payload) => {
+        return new ItemModel((payload)).save()
     },
     getAll:(query = {}) => {
         return ItemModel.find(query)
+    },
+    getSome:(query = {}) => {
+        return ItemModel.find({_id: {$in: query}})
     },
     getOne:(id) => {
         return ItemModel.findOne({ _id: id })
