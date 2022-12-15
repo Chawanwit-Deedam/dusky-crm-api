@@ -1,6 +1,6 @@
 import OrderHistoryService from '../services/orderHistory.service.js'
-import CustomerService from '../../customer/services/customer.service.js'
-import OrderItemService from '../../orderItem/services/orderItem.service.js'
+//import CustomerService from '../../customer/services/customer.service.js'
+//import OrderItemService from '../../orderItem/services/orderItem.service.js'
 
 const OrderHistoryController = {
     getOrderHistory: async (req, res) =>{
@@ -23,9 +23,9 @@ const OrderHistoryController = {
 
     createOrderHistory: async (req, res) => {
         ///const id = req.body.id
-        const { idCustomer, idOrder, orderPriceTotal, dateOfbuy, deliveryStatus, idPromotion, payment } = req.body
-        const customer = await CustomerService.getOne( idCustomer )
-        const order = await OrderItemService.getOne( idOrder )
+        const { customer, order, orderPriceTotal, dateOfbuy, deliveryStatus, idPromotion, payment } = req.body
+        // const customer = await CustomerService.getOne( idCustomer )
+        // const order = await OrderItemService.getOne( idOrder )
         const created = await OrderHistoryService.create({ customer, order, orderPriceTotal, dateOfbuy, deliveryStatus, idPromotion, payment })
     
         res.status(201).json({
@@ -35,8 +35,8 @@ const OrderHistoryController = {
     },
     updateOrderHistory: async (req, res) =>{
         const { id } = req.params
-        const { item, orderPriceTotal } = req.body
-        const updated = await OrderHistoryService.updateOne(id, { item, orderPriceTotal })
+        const { customer, order, orderPriceTotal, dateOfbuy, deliveryStatus, idPromotion, payment } = req.body
+        const updated = await OrderHistoryService.updateOne(id, { customer, order, orderPriceTotal, dateOfbuy, deliveryStatus, idPromotion, payment })
         
         res.status(200).json({
             success: true,
@@ -44,7 +44,7 @@ const OrderHistoryController = {
         })
     },
     deleteOrderHistoryById: async (req, res) => {
-        const { id } = req.body
+        const { id } = req.params
         const orderHistory = await OrderHistoryService.deleteOne(id)
 
         res.status(200).json({

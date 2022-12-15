@@ -14,7 +14,7 @@ const validator = createValidator({})
 MembershipRouter.get('/', MembershipController.getMembership)
 MembershipRouter.get('/:id', MembershipController.getMembershipById)
 MembershipRouter.post('/', validator.body(CreateMembershipDto), MembershipController.createMembership)
-MembershipRouter.patch('/:id', validator.body(UpdateMembershipDto), MembershipController.updateMembership)
+MembershipRouter.put('/:id', validator.body(UpdateMembershipDto), MembershipController.updateMembership)
 MembershipRouter.delete('/', validator.body(DeleteMembershipDto), MembershipController.deleteMembershipById)
 
 export default MembershipRouter

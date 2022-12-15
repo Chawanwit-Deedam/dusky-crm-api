@@ -14,7 +14,7 @@ const validator = createValidator({})
 OrderHistoryRouter.get('/', OrderHistoryController.getOrderHistory)
 OrderHistoryRouter.get('/:id', OrderHistoryController.getOrderHistoryById)
 OrderHistoryRouter.post('/', validator.body(CreateOrderHistoryDto), OrderHistoryController.createOrderHistory)
-OrderHistoryRouter.patch('/:id', validator.body(UpdateOrderHistoryDto), OrderHistoryController.updateOrderHistory)
+OrderHistoryRouter.put('/:id', validator.body(UpdateOrderHistoryDto), OrderHistoryController.updateOrderHistory)
 OrderHistoryRouter.delete('/', validator.body(DeleteOrderHistoryDto), OrderHistoryController.deleteOrderHistoryById)
 
 export default OrderHistoryRouter

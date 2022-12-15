@@ -14,7 +14,7 @@ const validator = createValidator({})
 ItemRouter.get('/', ItemController.getItem)
 ItemRouter.get('/:id', ItemController.getItemById)
 ItemRouter.post('/', validator.body(CreateItemDto), ItemController.createItem)
-ItemRouter.patch('/:id', validator.body(UpdateItemDto), ItemController.updateItem)
+ItemRouter.put('/:id', validator.body(UpdateItemDto), ItemController.updateItem)
 ItemRouter.delete('/', validator.body(DeleteItemDto), ItemController.deleteItemById)
 
 export default ItemRouter

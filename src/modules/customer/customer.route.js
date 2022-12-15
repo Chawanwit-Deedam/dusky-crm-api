@@ -14,7 +14,7 @@ const validator = createValidator({})
 CustomerRouter.get('/', CustomerController.getCustomer)
 CustomerRouter.get('/:id', CustomerController.getCustomerById)
 CustomerRouter.post('/', validator.body(CreateCustomerDto), CustomerController.createCustomer)
-CustomerRouter.patch('/:id', validator.body(UpdateCustomerDto), CustomerController.updateCustomer)
+CustomerRouter.put('/:id', validator.body(UpdateCustomerDto), CustomerController.updateCustomer)
 CustomerRouter.delete('/', validator.body(DeleteCustomerDto), CustomerController.deleteCustomerById)
 
 export default CustomerRouter

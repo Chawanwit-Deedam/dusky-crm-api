@@ -17,7 +17,12 @@ const AddressSchema = new Schema({
         type: String,
         required: true
     }
-}, {timestamps: false})
+}, 
+{
+    timestamps: false,
+    _id: false,
+    strict: true
+})
 
 const CustomerSchema = new Schema({
     username:{

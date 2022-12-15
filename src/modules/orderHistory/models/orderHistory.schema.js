@@ -2,14 +2,56 @@ import mongoose from '../../../common/database/mongoose.db.js'
 
 const { Schema, model} = mongoose
 
+const CustomerSchema = new Schema({
+    idCustomer: {
+        type: String,
+        required: true
+    },
+    firstName: {
+        type: String,
+        required: true
+    },
+    lastName: {
+        type: String,
+        required: true
+    }
+},{
+    timestamps: false,
+    _id: false,
+    strict: true
+})
+
+// const OrderSchema = new Schema({
+//     idItem: {
+//         type: String,
+//         required: true
+//     },
+//     nameItem: {
+//         type: String,
+//         required: true
+//     },    
+//     quantityItem: {
+//         type: Number,
+//         required: true
+//     },
+//     priceItem: {
+//         type: Number,
+//         required: true
+//     }
+// },{
+//     timestamps: false,
+//     _id: false,
+//     strict: true
+// })
+
 const OrderHistorySchema = new Schema({
 
     customer: {
-        type: Object,
+        type: CustomerSchema,
         required: true
     },
     order: {
-        type: Object,
+        type: Array,
         required: true
     },
     orderPriceTotal:{

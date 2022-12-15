@@ -6,10 +6,10 @@ const OrderItemSchema = new Schema({
     orderItem:{
         type: Array,
         required: true
-    // },
-    // dateOforder:{
-    //     type: Date,
-    //     required: true
+    },
+    sumOrder:{
+        type: Number,
+        required: true
     }
 }, {timestamps: false })
 

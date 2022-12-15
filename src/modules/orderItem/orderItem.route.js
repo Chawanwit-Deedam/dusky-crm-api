@@ -7,6 +7,7 @@ const OrderItemRouter = express.Router()
 const validator = createValidator({})
 
 OrderItemRouter.get('/', OrderItemController.getOrderItem)
+OrderItemRouter.get('/sum', OrderItemController.getOrderSumItem)
 OrderItemRouter.get('/:id', OrderItemController.getOrderItemById)
 OrderItemRouter.post('/', validator.body(createOrderItemDto), OrderItemController.createOrderItem)
 //OrderItemRouter.patch('/:id', validator.body(UpdateProductDto), OrderItemController.updateOrderItem)

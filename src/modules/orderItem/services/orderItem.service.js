@@ -7,6 +7,19 @@ const OrderItemService = {
     getAll:(query = {}) => {
         return OrderItemModel.find(query)
     },
+    getSumItem:(query = {}) => {
+        return OrderItemModel.aggregate(
+            [
+              {
+                $group : { 
+                    _id : "$order_list", 
+                    sumItem: { $sum: { $multiply: [ "$itemQuantity", "$itemPrice" ] } }, 
+                    count: { $sum: 1 }
+                }  
+              }
+            ]
+         )
+    },
     getOne:(id) => {
         return OrderItemModel.findOne({ _id: id })
     },
