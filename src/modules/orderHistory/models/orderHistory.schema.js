@@ -3,7 +3,7 @@ import mongoose from '../../../common/database/mongoose.db.js'
 const { Schema, model} = mongoose
 
 const CustomerSchema = new Schema({
-    idCustomer: {
+  idCustomer: {
         type: String,
         required: true
     },
@@ -21,28 +21,23 @@ const CustomerSchema = new Schema({
     strict: true
 })
 
-// const OrderSchema = new Schema({
-//     idItem: {
-//         type: String,
-//         required: true
-//     },
-//     nameItem: {
-//         type: String,
-//         required: true
-//     },    
-//     quantityItem: {
-//         type: Number,
-//         required: true
-//     },
-//     priceItem: {
-//         type: Number,
-//         required: true
-//     }
-// },{
-//     timestamps: false,
-//     _id: false,
-//     strict: true
-// })
+const OrderSchema = new Schema({
+    nameItem: {
+        type: String,
+        required: true
+    },    
+    quantityItem: {
+        type: Number,
+        required: true
+    },
+    priceItem: {
+        type: Number,
+        required: true
+    }
+},{
+    timestamps: false,
+    strict: true
+})
 
 const OrderHistorySchema = new Schema({
 
@@ -54,8 +49,8 @@ const OrderHistorySchema = new Schema({
         type: Array,
         required: true
     },
-    orderPriceTotal:{
-        type: Number,
+    orderPriceTotal: {
+        type: Array,
         required: true
     },
     dateOfbuy:{

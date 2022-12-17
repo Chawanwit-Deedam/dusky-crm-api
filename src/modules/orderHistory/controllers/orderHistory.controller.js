@@ -11,6 +11,14 @@ const OrderHistoryController = {
             data: orderHistory
         })
     },
+    getOrderHistoryCal: async (req, res) =>{
+        const orderHistory = await OrderHistoryService.getCal()
+
+        res.status(200).json({
+            success: true,
+            data: orderHistory
+        })
+    },
     getOrderHistoryById: async (req, res) => {
         const { id } = req.params
         const orderHistory = await OrderHistoryService.getOne(id)
@@ -23,9 +31,13 @@ const OrderHistoryController = {
 
     createOrderHistory: async (req, res) => {
         ///const id = req.body.id
-        const { customer, order, orderPriceTotal, dateOfbuy, deliveryStatus, idPromotion, payment } = req.body
-        // const customer = await CustomerService.getOne( idCustomer )
-        // const order = await OrderItemService.getOne( idOrder )
+        const { customer, order , dateOfbuy, deliveryStatus, idPromotion, payment } = req.body
+        // const arr = Array()
+        // arr[0] = order[2]
+        // arr[1] = order[1]
+        // const orderPriceTotal = arr
+        //const orderPriceTotal = await OrderHistoryService.getCal( arr )
+        //const order = await OrderItemService.getOne( idOrder )
         const created = await OrderHistoryService.create({ customer, order, orderPriceTotal, dateOfbuy, deliveryStatus, idPromotion, payment })
     
         res.status(201).json({
