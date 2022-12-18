@@ -4,21 +4,33 @@ const OrderHistoryService = {
     create: (payload) => {
         return new OrderHistoryModel(payload).save()
     },
+    sum: (payload) => {
+        return new OrderHistoryModel(payload).save()
+    },
     getAll: (query = {}) => {
         return OrderHistoryModel.find(query)
     },
-    getCal: (query = {}) => {
-        return OrderHistoryModel.aggregate(
-            [
-                {
-                    $group:
-                    {
-                        _id: "$_id",
-                        totalSaleAmount: { $sum: { $multiply: query } }
-                    }
-                }
-            ]
-        )
+    getPriceCal: (item) => {
+        let priceTotal = Array()
+        let sum = 0
+        for (let i = 0; i < item.length; i++) {
+            // let pro = parseInt(item[[i],[1]])
+            priceTotal[i] = item[i].priceItem * item[i].quantityItem
+        }
+        for (let i = 0; i < item.length; i++) {
+            // let pro = parseInt(item[[i],[1]])
+            sum = sum + priceTotal[i]
+        }
+        return sum 
+    },
+    getQuantityCal: (item) => {
+        let QuantityTotal = Array()
+        let sum = 0
+        for (let i = 0; i < item.length; i++) {
+            // let pro = parseInt(item[[i],[1]])
+            sum = sum + item[i].quantityItem
+        }
+        return sum 
     },
     getOne: (id) => {
         return OrderHistoryModel.findOne({ _id: id })

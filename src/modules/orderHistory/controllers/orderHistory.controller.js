@@ -31,14 +31,17 @@ const OrderHistoryController = {
 
     createOrderHistory: async (req, res) => {
         ///const id = req.body.id
-        const { customer, order , dateOfbuy, deliveryStatus, idPromotion, payment } = req.body
+        const { customer, item , orderQuantityTotal, orderPriceTotal, dateOfbuy, deliveryStatus, idPromotion, payment } = req.body
+        //const { customer, item , dateOfbuy, deliveryStatus, idPromotion, payment } = req.body
         // const arr = Array()
         // arr[0] = order[2]
         // arr[1] = order[1]
         // const orderPriceTotal = arr
-        //const orderPriceTotal = await OrderHistoryService.getCal( arr )
+        
+        const orderPricetotal = OrderHistoryService.getPriceCal(item) 
+        const orderQuantitytotal = OrderHistoryService.getQuantityCal(item) 
         //const order = await OrderItemService.getOne( idOrder )
-        const created = await OrderHistoryService.create({ customer, order, orderPriceTotal, dateOfbuy, deliveryStatus, idPromotion, payment })
+        const created = await OrderHistoryService.create({ customer, item , orderQuantitytotal, orderPricetotal, dateOfbuy, deliveryStatus, idPromotion, payment })
     
         res.status(201).json({
             success: true,

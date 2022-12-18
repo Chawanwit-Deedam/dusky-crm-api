@@ -8,8 +8,8 @@ export const CreateOrderHistoryDto = Joi.object({
         firstName: Joi.string().required(),
         lastName: Joi.string().required()
     },
-    order: Joi.array().items({
-        idItem: Joi.string().optional(),
+    item: Joi.array().items({
+        //idItem: Joi.string().optional(),
         nameItem: Joi.string().required(),
         quantityItem: Joi.number().required(),
         priceItem: Joi.number().required()
@@ -20,7 +20,8 @@ export const CreateOrderHistoryDto = Joi.object({
     //     quantityItem: Joi.number().required(),
     //     priceItem: Joi.number().required()
     // },
-    orderPriceTotal: Joi.array().optional(),
+    orderQuantityTotal: Joi.number().optional(),
+    orderPricetotal: Joi.number().optional(),
     dateOfbuy: Joi.date().required(),
     deliveryStatus: Joi.string().required(),
     idPromotion: Joi.string().required(),
