@@ -4,9 +4,6 @@ const OrderHistoryService = {
     create: (payload) => {
         return new OrderHistoryModel(payload).save()
     },
-    sum: (payload) => {
-        return new OrderHistoryModel(payload).save()
-    },
     getAll: (query = {}) => {
         return OrderHistoryModel.find(query)
     },
@@ -31,32 +28,20 @@ const OrderHistoryService = {
       }
         return null
     },
-    getQuantityCal: (item) => {
-      if(Array.isArray(item)){
-        let QuantityTotal = Array()
-        let sum = 0
-            // for (let i = 0; i < item.length; i++) {
-            //     // let pro = parseInt(item[[i],[1]])
-            //     sum += item[i].quantityItem
-            // }
-        sum = item.reduce((acc, curr) => {
-          return acc += curr.quantityItem
-        },0)
-        return sum 
-      }
-      return null
-    },
-    getRepeatType: (item) => {
-      let RepeatType = Array()
-      for (let i = 0; i < item.length; i++){
-        if(item[i].typeItem){
-          RepeatType.push(item[i].typeItem)
-        }
-      }
-      return RepeatType    
-    },
     getOne: (id) => {
         return OrderHistoryModel.findOne({ _id: id })
+    },
+    getRepeat: async (id) => {
+        let count = 0
+        const customerId = await OrderHistoryModel.find({'customer.idCustomer': id})
+        // for (let i = 0; i < customerId.length; i++) {
+        //     count += 1
+        // }
+
+        //const CCC = customerId.dateOfbuy
+
+        return {count: customerId.length}
+        // return OrderHistoryModel.find({ _id: id })
     },
     updateOne: (id, payload) => {
         return OrderHistoryModel.findOneAndUpdate({ _id: id }, { $set: payload })

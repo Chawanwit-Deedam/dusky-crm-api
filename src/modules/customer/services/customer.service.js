@@ -7,8 +7,6 @@ const CustomerService = {
     },
     getAll:(query = {}) => {
         return CustomerModel.find(query)
-
-
     },
     getSome:(query = {}) => {
         return CustomerModel.find({_id: {$in: query}})

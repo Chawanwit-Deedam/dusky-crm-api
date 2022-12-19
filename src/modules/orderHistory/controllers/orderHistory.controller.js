@@ -20,15 +20,20 @@ const OrderHistoryController = {
             data: orderHistory
         })
     },
+    getOrderHistoryByIdRepeat: async (req, res) => {
+        const { id } = req.params
+        const orderHistory = await OrderHistoryService.getRepeat(id)
+
+        res.status(200).json({
+            success: true,
+            data: orderHistory
+        })
+    },
 
     createOrderHistory: async (req, res) => {
         ///const id = req.body.id
         const { customer, item , orderQuantitytotal, orderPricetotal, orderRepeattype, dateOfbuy, deliveryStatus, idPromotion, payment } = req.body
-        //const { customer, item , dateOfbuy, deliveryStatus, idPromotion, payment } = req.body
-        // const arr = Array()
-        // arr[0] = order[2]
-        // arr[1] = order[1]
-        // const orderPriceTotal = arr
+        
         
         const {sumPrice,sumQuantity, repeatType} = OrderHistoryService.getCumulativeAmount(item) 
         // const orderQuantityTotal = OrderHistoryService.getQuantityCal(item) 

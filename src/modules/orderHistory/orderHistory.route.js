@@ -12,6 +12,7 @@ const OrderHistoryRouter = express.Router()
 const validator = createValidator({})
 
 OrderHistoryRouter.get('/', OrderHistoryController.getOrderHistory)
+OrderHistoryRouter.get('/Repeat/:id', OrderHistoryController.getOrderHistoryByIdRepeat)
 OrderHistoryRouter.get('/:id', OrderHistoryController.getOrderHistoryById)
 OrderHistoryRouter.post('/', validator.body(CreateOrderHistoryDto), OrderHistoryController.createOrderHistory)
 OrderHistoryRouter.put('/:id', validator.body(UpdateOrderHistoryDto), OrderHistoryController.updateOrderHistory)
