@@ -10,27 +10,50 @@ const OrderHistoryService = {
     getAll: (query = {}) => {
         return OrderHistoryModel.find(query)
     },
-    getPriceCal: (item) => {
+    getCumulativeAmount: (item) => {
+      if(Array.isArray(item)){
         let priceTotal = Array()
-        let sum = 0
+        let sumPrice = 0
+        let sumQuantity = 0
+        const repeatType = []
         for (let i = 0; i < item.length; i++) {
-            // let pro = parseInt(item[[i],[1]])
-            priceTotal[i] = item[i].priceItem * item[i].quantityItem
+                // let pro = parseInt(item[[i],[1]])
+          sumPrice += item[i].priceItem * item[i].quantityItem
+          sumQuantity += item[i].quantityItem
+          if(item[i].typeItem){
+            repeatType.push(item[i].typeItem)
+          }
         }
-        for (let i = 0; i < item.length; i++) {
-            // let pro = parseInt(item[[i],[1]])
-            sum = sum + priceTotal[i]
-        }
-        return sum 
+            // sum = item.reduce((acc, curr) => {
+            //     return acc +=  curr.priceItem * curr.quantityItem
+            // },0)
+        return { sumPrice, sumQuantity, repeatType } 
+      }
+        return null
     },
     getQuantityCal: (item) => {
+      if(Array.isArray(item)){
         let QuantityTotal = Array()
         let sum = 0
-        for (let i = 0; i < item.length; i++) {
-            // let pro = parseInt(item[[i],[1]])
-            sum = sum + item[i].quantityItem
-        }
+            // for (let i = 0; i < item.length; i++) {
+            //     // let pro = parseInt(item[[i],[1]])
+            //     sum += item[i].quantityItem
+            // }
+        sum = item.reduce((acc, curr) => {
+          return acc += curr.quantityItem
+        },0)
         return sum 
+      }
+      return null
+    },
+    getRepeatType: (item) => {
+      let RepeatType = Array()
+      for (let i = 0; i < item.length; i++){
+        if(item[i].typeItem){
+          RepeatType.push(item[i].typeItem)
+        }
+      }
+      return RepeatType    
     },
     getOne: (id) => {
         return OrderHistoryModel.findOne({ _id: id })

@@ -11,14 +11,6 @@ const OrderHistoryController = {
             data: orderHistory
         })
     },
-    getOrderHistoryCal: async (req, res) =>{
-        const orderHistory = await OrderHistoryService.getCal()
-
-        res.status(200).json({
-            success: true,
-            data: orderHistory
-        })
-    },
     getOrderHistoryById: async (req, res) => {
         const { id } = req.params
         const orderHistory = await OrderHistoryService.getOne(id)
@@ -31,17 +23,18 @@ const OrderHistoryController = {
 
     createOrderHistory: async (req, res) => {
         ///const id = req.body.id
-        const { customer, item , orderQuantityTotal, orderPriceTotal, dateOfbuy, deliveryStatus, idPromotion, payment } = req.body
+        const { customer, item , orderQuantitytotal, orderPricetotal, orderRepeattype, dateOfbuy, deliveryStatus, idPromotion, payment } = req.body
         //const { customer, item , dateOfbuy, deliveryStatus, idPromotion, payment } = req.body
         // const arr = Array()
         // arr[0] = order[2]
         // arr[1] = order[1]
         // const orderPriceTotal = arr
         
-        const orderPricetotal = OrderHistoryService.getPriceCal(item) 
-        const orderQuantitytotal = OrderHistoryService.getQuantityCal(item) 
+        const {sumPrice,sumQuantity, repeatType} = OrderHistoryService.getCumulativeAmount(item) 
+        // const orderQuantityTotal = OrderHistoryService.getQuantityCal(item) 
+        // const orderRepeatType = OrderHistoryService.getRepeatType(item)
         //const order = await OrderItemService.getOne( idOrder )
-        const created = await OrderHistoryService.create({ customer, item , orderQuantitytotal, orderPricetotal, dateOfbuy, deliveryStatus, idPromotion, payment })
+        const created = await OrderHistoryService.create({ customer, item , orderPriceTotal: sumPrice , orderQuantityTotal: sumQuantity, orderRepeatType: repeatType,  dateOfbuy, deliveryStatus, idPromotion, payment })
     
         res.status(201).json({
             success: true,

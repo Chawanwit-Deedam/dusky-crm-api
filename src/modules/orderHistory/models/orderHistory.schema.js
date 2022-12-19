@@ -41,12 +41,16 @@ const OrderHistorySchema = new Schema({
 		// 	required: true
 		// }
 	}],
-	orderQuantitytotal: {
+	orderQuantityTotal: {
 		type: Number,
 		required: true
 	},
-	orderPricetotal: {
+	orderPriceTotal: {
 		type: Number,
+		required: true
+	},
+	orderRepeatType: {
+		type: Array,
 		required: true
 	},
 	dateOfbuy: {

@@ -12,7 +12,8 @@ export const CreateOrderHistoryDto = Joi.object({
         //idItem: Joi.string().optional(),
         nameItem: Joi.string().required(),
         quantityItem: Joi.number().required(),
-        priceItem: Joi.number().required()
+        priceItem: Joi.number().required(),  
+        typeItem: Joi.string().required()
     }),
     // order: {
     //     idItem: Joi.string().required(),
@@ -21,7 +22,8 @@ export const CreateOrderHistoryDto = Joi.object({
     //     priceItem: Joi.number().required()
     // },
     orderQuantityTotal: Joi.number().optional(),
-    orderPricetotal: Joi.number().optional(),
+    orderPriceTotal: Joi.number().optional(),
+    orderRepeatType: Joi.array().optional(),
     dateOfbuy: Joi.date().required(),
     deliveryStatus: Joi.string().required(),
     idPromotion: Joi.string().required(),
