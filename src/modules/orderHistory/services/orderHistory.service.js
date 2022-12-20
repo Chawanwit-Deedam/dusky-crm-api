@@ -37,40 +37,51 @@ const OrderHistoryService = {
         let count = customerId.length
         //customer 
         let cusTomer = customerId[0].customer
-
-        let A = [] //[customerId[0].item[0].nameItem],[0] [''],[0]
+        //orderitem
+        let orderItem = [] //[customerId[0].item[0].nameItem],[0] [''],[0]
         for (let i = 0; i < customerId.length; i++) {
             for (let j = 0; j < customerId[i].item.length; j++) {
-                A.push(customerId[i].item[j])
+                orderItem.push(customerId[i].item[j])
                 //allItem.push[customerId[i].item[j].nameItem]
-                    //[customerId[i].item[j].quantityItem]
+                //[customerId[i].item[j].quantityItem]
             }
         }
-        let B = [...(new Set(A.map(({ nameItem }) => nameItem)))];
-        let BB = B.length
-        let allItem = []
-        for (let i = 0; i < A.length; i++) {
-            for (let j = 0; j < B.length; j++) {
-                
-                allItem.push({
-                    nameItem: A[i].nameItem
-                })
-                
+        //let B = [...(new Set(A.map(({ nameItem }) => nameItem)))];
+        //let BB = []
+        let allItemRepeat = []
+        let allTypeRepeat = []
+        for (let j = 0; j < orderItem.length; j++) {
+            //repeat orderitem
+            if(orderItem[j].nameItem){
+                const findsort = allItemRepeat.findIndex((items) => items.nameItem === orderItem[j].nameItem) 
+            
+                if(findsort >= 0) {
+                    allItemRepeat[findsort].qty += orderItem[j].quantityItem
+                }
+
+                else {
+                    allItemRepeat.push({
+                        nameItem: orderItem[j].nameItem,
+                        qty: orderItem[j].quantityItem
+                    })
+                }
             }
-        }
-            // if (i > 0) {
-            //      for (let j = 0; j < allItem.length; j++) {
-            //         if(allItem[j] !== A[i].nameItem){
-            //             allItem.push({
-            //                 nameItem: A[i].nameItem
-            //             })
-            //         }
-            //      }
-            // }
-            // allItem.push({
-            //     nameItem: A[i].nameItem
-            // })
-    
+            //repeat typeitem
+            if(orderItem[j].typeItem){
+                const findsort = allTypeRepeat.findIndex((items) => items.typeItem === orderItem[j].typeItem) 
+                
+                if(findsort >= 0) {
+                    allTypeRepeat[findsort].qty += orderItem[j].quantityItem
+                }
+
+                else {
+                    allTypeRepeat.push({
+                        typeItem: orderItem[j].typeItem,
+                        qty: orderItem[j].quantityItem
+                    })
+                }
+            }
+        } 
         //จำนวนสินค้าทั้งหมดที่เคยซื้อ ยอดซื้อทั้งหมดที่เคยซื้อ
         let totalquantityItem = 0
         let totalpriceItem = 0
@@ -78,18 +89,8 @@ const OrderHistoryService = {
             totalquantityItem += customerId[i].orderQuantityTotal
             totalpriceItem += customerId[i].orderPriceTotal
         }
-        // for (let i = 0; i < customerId.length; i++) {
-        //     if(customerId[i].typeItem){
-        //         allItem.push(item[i].typeItem)
-        //     }    
-        // }
-        // for (let i = 0; i < customerId.length; i++) {
-        //     count += 1
-        // }
-        //const CCC = customerId.dateOfbuy
 
-        return { count, cusTomer, B, totalquantityItem, totalpriceItem ,}
-        // return OrderHistoryModel.find({ _id: id })
+        return { count, cusTomer, totalquantityItem, totalpriceItem, allItemRepeat, allTypeRepeat, orderItem,  }
     },
     updateOne: (id, payload) => {
         return OrderHistoryModel.findOneAndUpdate({ _id: id }, { $set: payload })
@@ -100,3 +101,52 @@ const OrderHistoryService = {
 }
 
 export default OrderHistoryService
+
+
+// let C = []
+        // let D = []
+        // let sum 
+        // let oneitem = 0
+        // for (let i = 0; i < B.length; i++) {
+        //     D.push(allItem.filter(item => item.nameItem === B[i]))
+        //     sum = D[i].quantityItem
+        //     if(B[i] === D[i].nameItem){
+        //          sum = D.length
+        //     }
+        // }
+
+        // if(allItem.length > 0){
+        //     for (let x = 0; x < allItem.length; x++) {
+        //         if(allItem[x].nameItem === A[i].nameItem){
+        //             break
+        //         }
+
+        //     }
+        // } else if(allItem.length == 0){
+        //     allItem.push({
+        //         nameItem: A[i].nameItem,
+        //         quantityItem: A[i].quantityItem
+        //     })
+        // }
+        // if (i > 0) {
+        //      for (let j = 0; j < allItem.length; j++) {
+        //         if(allItem[j] !== A[i].nameItem){
+        //             allItem.push({
+        //                 nameItem: A[i].nameItem
+        //             })
+        //         }
+        //      }
+        // }
+        // allItem.push({
+        //     nameItem: A[i].nameItem
+        // })
+
+        // for (let i = 0; i < customerId.length; i++) {
+        //     if(customerId[i].typeItem){
+        //         allItem.push(item[i].typeItem)
+        //     }    
+        // }
+        // for (let i = 0; i < customerId.length; i++) {
+        //     count += 1
+        // }
+        //const CCC = customerId.dateOfbuy
