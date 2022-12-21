@@ -1,4 +1,6 @@
 import OrderHistoryModel from '../models/orderHistory.schema.js'
+import CustomerModel from '../../customer/models/customer.schema.js'
+//import CustomerService from '../../customer/services/customer.service.js'
 
 const OrderHistoryService = {
     create: (payload) => {
@@ -32,65 +34,81 @@ const OrderHistoryService = {
         return OrderHistoryModel.findOne({ _id: id })
     },
     getRepeat: async (id) => {
+      let _id = id
+      let customerId = await OrderHistoryModel.find( {'customer.idCustomer': _id} )
+      let customerModel = await CustomerModel.findOne({ _id })
 
-        const customerId = await OrderHistoryModel.find({ 'customer.idCustomer': id })
-        let count = customerId.length
-        //customer 
-        let cusTomer = customerId[0].customer
-        //orderitem
-        let orderItem = [] //[customerId[0].item[0].nameItem],[0] [''],[0]
-        for (let i = 0; i < customerId.length; i++) {
-            for (let j = 0; j < customerId[i].item.length; j++) {
-                orderItem.push(customerId[i].item[j])
-                //allItem.push[customerId[i].item[j].nameItem]
-                //[customerId[i].item[j].quantityItem]
-            }
+      //return customerId.length
+      if (customerId.length > 0) {
+        if ( (customerId[0].customer).idCustomer === _id ) {
+          let count = customerId.length
+          //customer 
+          let cusTomer = customerId[0].customer
+          //orderitem
+          let orderItem = [] //[customerId[0].item[0].nameItem],[0] [''],[0]ss
+          for (let i = 0; i < customerId.length; i++) {
+              for (let j = 0; j < customerId[i].item.length; j++) {
+                  customerId[i].item[j].dateOfbuy = customerId[i].dateOfbuy
+                  customerId[i].item[j].payment = customerId[i].payment
+                  orderItem.push(
+                      customerId[i].item[j]
+                  )
+              }
+          }
+          let allItemRepeat = []
+          let allTypeRepeat = []
+          for (let j = 0; j < orderItem.length; j++) {
+              //repeat orderitem
+              if(orderItem[j].nameItem){
+                  const findsort = allItemRepeat.findIndex((items) => items.nameItem === orderItem[j].nameItem) 
+              
+                  if(findsort >= 0) {
+                      allItemRepeat[findsort].qty += orderItem[j].quantityItem
+                      allItemRepeat[findsort].totalItem += orderItem[j].priceItem * orderItem[j].quantityItem
+                  }
+  
+                  else {
+                      allItemRepeat.push({
+                          nameItem: orderItem[j].nameItem,
+                          qty: orderItem[j].quantityItem,
+                          totalItem: orderItem[j].priceItem * orderItem[j].quantityItem
+                      })
+                  }
+              }
+              //repeat typeitem
+              if(orderItem[j].typeItem){
+                  const findsort = allTypeRepeat.findIndex((items) => items.typeItem === orderItem[j].typeItem) 
+                  
+                  if(findsort >= 0) {
+                      allTypeRepeat[findsort].qty += orderItem[j].quantityItem
+                      allTypeRepeat[findsort].totalType += orderItem[j].priceItem * orderItem[j].quantityItem
+                  }
+  
+                  else {
+                      allTypeRepeat.push({
+                          typeItem: orderItem[j].typeItem,
+                          qty: orderItem[j].quantityItem,
+                          totalType: orderItem[j].priceItem * orderItem[j].quantityItem
+                      })
+                  }
+              }
+          } 
+          //จำนวนสินค้าทั้งหมดที่เคยซื้อ ยอดซื้อทั้งหมดที่เคยซื้อ
+          let totalquantityItem = 0
+          let totalpriceItem = 0
+          for (let i = 0; i < customerId.length; i++) {
+              totalquantityItem += customerId[i].orderQuantityTotal
+              totalpriceItem += customerId[i].orderPriceTotal
+          }
+          return { count, cusTomer, totalquantityItem, totalpriceItem, allItemRepeat, allTypeRepeat, orderItem,  }
         }
-        //let B = [...(new Set(A.map(({ nameItem }) => nameItem)))];
-        //let BB = []
-        let allItemRepeat = []
-        let allTypeRepeat = []
-        for (let j = 0; j < orderItem.length; j++) {
-            //repeat orderitem
-            if(orderItem[j].nameItem){
-                const findsort = allItemRepeat.findIndex((items) => items.nameItem === orderItem[j].nameItem) 
-            
-                if(findsort >= 0) {
-                    allItemRepeat[findsort].qty += orderItem[j].quantityItem
-                }
+      } else {
+      if (customerModel._id == _id) {
+        return customerModel
+      }
+      return null
+    }
 
-                else {
-                    allItemRepeat.push({
-                        nameItem: orderItem[j].nameItem,
-                        qty: orderItem[j].quantityItem
-                    })
-                }
-            }
-            //repeat typeitem
-            if(orderItem[j].typeItem){
-                const findsort = allTypeRepeat.findIndex((items) => items.typeItem === orderItem[j].typeItem) 
-                
-                if(findsort >= 0) {
-                    allTypeRepeat[findsort].qty += orderItem[j].quantityItem
-                }
-
-                else {
-                    allTypeRepeat.push({
-                        typeItem: orderItem[j].typeItem,
-                        qty: orderItem[j].quantityItem
-                    })
-                }
-            }
-        } 
-        //จำนวนสินค้าทั้งหมดที่เคยซื้อ ยอดซื้อทั้งหมดที่เคยซื้อ
-        let totalquantityItem = 0
-        let totalpriceItem = 0
-        for (let i = 0; i < customerId.length; i++) {
-            totalquantityItem += customerId[i].orderQuantityTotal
-            totalpriceItem += customerId[i].orderPriceTotal
-        }
-
-        return { count, cusTomer, totalquantityItem, totalpriceItem, allItemRepeat, allTypeRepeat, orderItem,  }
     },
     updateOne: (id, payload) => {
         return OrderHistoryModel.findOneAndUpdate({ _id: id }, { $set: payload })
@@ -150,3 +168,6 @@ export default OrderHistoryService
         //     count += 1
         // }
         //const CCC = customerId.dateOfbuy
+
+        //let B = [...(new Set(A.map(({ nameItem }) => nameItem)))];
+        //let BB = []
