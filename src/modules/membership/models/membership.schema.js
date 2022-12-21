@@ -4,18 +4,27 @@
 const { Schema, model} = mongoose
 
 const MembershipSchema = new Schema({
-    membershipName:{
+    memberShipName:{
         type: String,
         required: true
     },
-    marking:{
-        type: String,
+    memberShipQuantity:{
+        type: Number,
+        required: true
+    },
+    memberShipPrice:{
+        type: Number,
         required: true
     }
 
 
 
-}, {timestamps: true })
+}, 
+{
+    timestamps: false,
+    _id: false,
+    strict: true
+})
 
 const MembershipModel = model('memberships', MembershipSchema)
 

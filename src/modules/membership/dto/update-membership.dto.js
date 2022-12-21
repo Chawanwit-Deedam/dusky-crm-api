@@ -1,7 +1,9 @@
 import Joi from 'joi'
 
 export const UpdateMembershipDto = Joi.object({
-    membershipName: Joi.string().required(),
-    marking: Joi.string().required()
+    //id: Joi.string().optional(),
+  membershipName: Joi.string().optional(),
+  memberShipQuantity: Joi.number().optional(),
+  memberShipPrice: Joi.number().optional()
     
 })
