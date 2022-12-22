@@ -1,4 +1,6 @@
 import OrderHistoryModel from '../models/orderHistory.schema.js'
+import MembershipModel from '../../membership/models/membership.schema.js'
+
 
 const OrderHistoryService = {
     create: (payload) => {
@@ -40,7 +42,7 @@ const OrderHistoryService = {
         //orderitem
         let orderItem = [] //[customerId[0].item[0].nameItem],[0] [''],[0]
         for (let i = 0; i < customerId.length; i++) {
-            for (let j = 0; j < customerId[i].item.length; j++) {
+            for (let j = 0; j < customerId[i].item.length; j++) {   
                 orderItem.push(customerId[i].item[j])
                 //allItem.push[customerId[i].item[j].nameItem]
                 //[customerId[i].item[j].quantityItem]
@@ -90,8 +92,46 @@ const OrderHistoryService = {
             totalpriceItem += customerId[i].orderPriceTotal
         }
 
-        return { count, cusTomer, totalquantityItem, totalpriceItem, allItemRepeat, allTypeRepeat, orderItem,  }
+        return { count, cusTomer, totalquantityItem, totalpriceItem, allItemRepeat, allTypeRepeat, orderItem }
     },
+    getLevel: async (id, query = {}) => {
+        const idCustomer = await OrderHistoryModel.find({ 'customer.idCustomer': id })
+        let totalquantityItem = 0
+        let totalpriceItem = 0
+        let levelMemberShip = []
+        let levelOfCustomer = ""
+        for (let i = 0; i < idCustomer.length; i++) {
+            totalquantityItem += idCustomer[i].orderQuantityTotal
+            totalpriceItem += idCustomer[i].orderPriceTotal
+        }
+        const levelCustomer = await MembershipModel.find(query)
+        const countLevelMemberShip = levelCustomer.length
+
+        for(let j=0; j < levelCustomer.length; j++){
+            if(levelCustomer[j].memberShipName){
+                levelMemberShip.push({
+                    levelName: levelCustomer[j].memberShipName,
+                    levelQuantity: levelCustomer[j].memberShipQuantity,
+                    levelPrice: levelCustomer[j].memberShipPrice
+                })
+            }
+        }
+        let a
+
+        for(let i=0; i < levelCustomer.length; i++){
+            if( totalquantityItem > levelCustomer[i].memberShipQuantity &&  totalpriceItem > levelCustomer[i].memberShipPrice){
+                levelOfCustomer = levelCustomer[i].memberShipName
+                a =levelCustomer[i].memberShipQuantity
+            }
+            else{
+                levelOfCustomer = "classic"
+            }
+        }
+
+
+        return { totalquantityItem, totalpriceItem, countLevelMemberShip, levelMemberShip, levelOfCustomer, a}
+    }, 
+
     updateOne: (id, payload) => {
         return OrderHistoryModel.findOneAndUpdate({ _id: id }, { $set: payload })
     },

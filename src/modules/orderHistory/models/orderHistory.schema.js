@@ -1,6 +1,23 @@
 import mongoose from '../../../common/database/mongoose.db.js'
 
 const { Schema, model } = mongoose
+// const MembershipSchema = new Schema({
+// 	mamberShipName: {
+// 		type: String,
+// 		required: true
+// 	},
+// 	memberShipQuantity: {
+// 		type: Number,
+// 		required: true
+// 	},
+// 	memberShipPrice: {
+// 		type: Number,
+// 		required: true
+// 	}
+// }, {
+// 	timestamps: false,
+// 	strict: true
+// })
 
 const CustomerSchema = new Schema({
 	idCustomer: {
@@ -28,7 +45,7 @@ const OrderHistorySchema = new Schema({
 		required: true
 	},
 	item: [{
-		// nameItem: {
+		// nameItem: {	
 		// 	type: String,
 		// 	required: true
 		// },
@@ -69,6 +86,7 @@ const OrderHistorySchema = new Schema({
 		type: String,
 		required: true
 	}
+
 
 }, { timestamps: true })
 
