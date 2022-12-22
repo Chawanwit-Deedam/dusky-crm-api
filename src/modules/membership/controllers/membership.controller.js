@@ -15,7 +15,7 @@ const MembershipController = {
         res.status(200).json({
             success: true,
             data: membership
-        })
+        })  
     },
 
     createMembership: async (req, res) => {
