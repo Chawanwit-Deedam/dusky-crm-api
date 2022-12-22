@@ -99,7 +99,7 @@ const OrderHistoryService = {
         let totalquantityItem = 0
         let totalpriceItem = 0
         let levelMemberShip = []
-        let levelOfCustomer = ""
+        let levelForCustomer
         for (let i = 0; i < idCustomer.length; i++) {
             totalquantityItem += idCustomer[i].orderQuantityTotal
             totalpriceItem += idCustomer[i].orderPriceTotal
@@ -116,20 +116,17 @@ const OrderHistoryService = {
                 })
             }
         }
-        let a
+        
 
         for(let i=0; i < levelCustomer.length; i++){
             if( totalquantityItem > levelCustomer[i].memberShipQuantity &&  totalpriceItem > levelCustomer[i].memberShipPrice){
-                levelOfCustomer = levelCustomer[i].memberShipName
-                a =levelCustomer[i].memberShipQuantity
-            }
-            else{
-                levelOfCustomer = "classic"
+                
+                levelForCustomer=levelCustomer[i].memberShipName
             }
         }
 
 
-        return { totalquantityItem, totalpriceItem, countLevelMemberShip, levelMemberShip, levelOfCustomer, a}
+        return { totalquantityItem, totalpriceItem, countLevelMemberShip, levelMemberShip, levelForCustomer}
     }, 
 
     updateOne: (id, payload) => {
