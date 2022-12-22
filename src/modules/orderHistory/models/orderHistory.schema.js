@@ -44,20 +44,11 @@ const OrderHistorySchema = new Schema({
 		type: CustomerSchema,
 		required: true
 	},
-	item: [{
-		// nameItem: {	
-		// 	type: String,
-		// 	required: true
-		// },
-		// QuantityItem: {
-		// 	type: Number,
-		// 	required: true
-		// },
-		// priceItem: {
-		// 	type: Number,
-		// 	required: true
-		// }
-	}],
+	item: {
+		type: Array,
+		required: true
+	},
+
 	orderQuantityTotal: {
 		type: Number,
 		required: true
