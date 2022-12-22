@@ -39,7 +39,7 @@ const MembershipController = {
         })
     },
     deleteMembershipById: async (req, res) => {
-        const { id } = req.body
+        const { id } = req.params
         const membership = await MembershipService.deleteOne(id)
 
         res.status(200).json({

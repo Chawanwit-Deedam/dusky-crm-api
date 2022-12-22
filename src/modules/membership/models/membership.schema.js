@@ -1,4 +1,4 @@
-import mongoose from '../../../common/database/mongoose.db.js'
+  import mongoose from '../../../common/database/mongoose.db.js'
 
 
 const { Schema, model} = mongoose
@@ -17,7 +17,18 @@ const MembershipSchema = new Schema({
         required: true
     }
 
+<<<<<<< HEAD
 }, {timestamps: true })
+=======
+
+
+}, 
+{
+    timestamps: false,
+    _id: false,
+    strict: true
+})
+>>>>>>> dev
 
 const MembershipModel = model('memberships', MembershipSchema)
 
