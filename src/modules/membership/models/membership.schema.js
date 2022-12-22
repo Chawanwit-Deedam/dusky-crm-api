@@ -16,19 +16,12 @@ const MembershipSchema = new Schema({
         type: Number,
         required: true
     }
-
-<<<<<<< HEAD
-}, {timestamps: true })
-=======
-
-
 }, 
 {
     timestamps: false,
     _id: false,
     strict: true
 })
->>>>>>> dev
 
 const MembershipModel = model('memberships', MembershipSchema)
 
