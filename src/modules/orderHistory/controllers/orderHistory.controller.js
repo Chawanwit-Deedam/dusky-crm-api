@@ -1,7 +1,4 @@
 import OrderHistoryService from '../services/orderHistory.service.js'
-//import CustomerService from '../../customer/services/customer.service.js'
-//import OrderItemService from '../../orderItem/services/orderItem.service.js'
-import MembershipService from '../../membership/services/membership.service.js'
 
 const OrderHistoryController = {
     getOrderHistory: async (req, res) =>{
@@ -21,35 +18,29 @@ const OrderHistoryController = {
             data: orderHistory
         })
     },
-    getOrderHistoryByIdRepeat: async (req, res) => {
-        const { id } = req.params
-        const orderHistory = await OrderHistoryService.getRepeat(id)
+    getOrderHistoryByIdReport: async (req, res) => {
+        try {
+            const { id } = req.params
+            const orderHistory = await OrderHistoryService.getReport(id)
 
-        res.status(200).json({
-            success: true,
-            data: orderHistory
-        })
-    },
-    getLevelById: async (req, res) => {
-        const { id } = req.params
-        const levelMember = await OrderHistoryService.getLevel(id)
-        
-        res.status(200).json({
-            success: true,
-            data: levelMember
-        })
+            res.status(200).json({
+                success: true,
+                data: orderHistory
+            })
+        } catch (error) {
+            res.status(200).json({
+                success: false,
+                data: error
+            })
+            console.log(error)
+        }
     },
     createOrderHistory: async (req, res) => {
-        ///const id = req.body.id
-        const { customer, item , orderQuantitytotal, orderPricetotal, orderRepeattype, dateOfbuy, deliveryStatus, idPromotion, payment, memberShip } = req.body
-        
-
-        const {sumPrice,sumQuantity, repeatType} = OrderHistoryService.getCumulativeAmount(item) 
-        // const orderQuantityTotal = OrderHistoryService.getQuantityCal(item) 
-        // const orderRepeatType = OrderHistoryService.getRepeatType(item)
-        //const order = await OrderItemService.getOne( idOrder )
-        const created = await OrderHistoryService.create({ customer, item , orderPriceTotal: sumPrice , orderQuantityTotal: sumQuantity, orderRepeatType: repeatType,  dateOfbuy, deliveryStatus, idPromotion, payment, memberShip })
     
+        const { customer, item, orderQuantitytotal, orderPricetotal, orderRepeattype, dateOfbuy, deliveryStatus, idPromotion, payment } = req.body
+        const { sumPrice, sumQuantity, repeatType } = OrderHistoryService.getCumulativeAmount(item)
+        const created = await OrderHistoryService.create({ customer, item, orderPriceTotal: sumPrice, orderQuantityTotal: sumQuantity, orderRepeatType: repeatType, dateOfbuy, deliveryStatus, idPromotion, payment })
+       
         res.status(201).json({
             success: true,
             data: created
