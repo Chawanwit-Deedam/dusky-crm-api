@@ -1,8 +1,16 @@
 import CustomerService from '../services/customer.service.js'
-import OrderHistoryService from '../../orderHistory/services/orderHistory.service.js'
+
 const CustomerController = {
     getCustomer: async (req, res) =>{
         const customer = await CustomerService.getAll()
+        res.status(200).json({
+            success: true,
+            data: customer
+        })
+    },
+    getCustomerLevel: async (req, res) =>{
+        const customer = await CustomerService.getLevel()
+
         res.status(200).json({
             success: true,
             data: customer

@@ -5,5 +5,4 @@ export const UpdateMembershipDto = Joi.object({
     memberShipColor: Joi.string().required(),
     memberShipQuantity: Joi.number().required(),
     memberShipPrice: Joi.number().required()
-    
 })

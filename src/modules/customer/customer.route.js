@@ -12,6 +12,8 @@ const CustomerRouter = express.Router()
 const validator = createValidator({})
 
 CustomerRouter.get('/', CustomerController.getCustomer)
+CustomerRouter.get('/level', CustomerController.getCustomerLevel)
+
 CustomerRouter.get('/:id', CustomerController.getCustomerById)
 
 

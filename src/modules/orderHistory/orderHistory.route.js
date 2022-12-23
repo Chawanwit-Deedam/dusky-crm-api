@@ -12,9 +12,9 @@ const OrderHistoryRouter = express.Router()
 const validator = createValidator({})
 
 OrderHistoryRouter.get('/', OrderHistoryController.getOrderHistory)
-OrderHistoryRouter.get('/Repeat/:id', OrderHistoryController.getOrderHistoryByIdRepeat)
 
-OrderHistoryRouter.get('/level/:id', OrderHistoryController.getLevelById)
+OrderHistoryRouter.get('/Report/:id', OrderHistoryController.getOrderHistoryByIdReport)
+OrderHistoryRouter.get('/level', OrderHistoryController.getLevelAll)
 
 OrderHistoryRouter.get('/:id', OrderHistoryController.getOrderHistoryById)
 OrderHistoryRouter.post('/', validator.body(CreateOrderHistoryDto), OrderHistoryController.createOrderHistory)
