@@ -1,9 +1,14 @@
 import OrderHistoryService from '../services/orderHistory.service.js'
 
 const OrderHistoryController = {
+<<<<<<< HEAD
     getOrderHistory: async (req, res) => {
         try {
             const orderHistory = await OrderHistoryService.getAll()
+=======
+    getOrderHistory: async (req, res) =>{
+        const orderHistory = await OrderHistoryService.getAll()
+>>>>>>> origin
 
             res.status(200).json({
                 success: true,
@@ -52,6 +57,7 @@ const OrderHistoryController = {
         }
     },
     createOrderHistory: async (req, res) => {
+<<<<<<< HEAD
         try {
             const { customer, item, orderQuantitytotal, orderPricetotal, orderRepeattype, dateOfbuy, deliveryStatus, idPromotion, payment } = req.body
             const { sumPrice, sumQuantity, repeatType } = OrderHistoryService.getCumulativeAmount(item)
@@ -86,6 +92,27 @@ const OrderHistoryController = {
             })
             console.log(error)
         }
+=======
+    
+        const { customer, item, orderQuantitytotal, orderPricetotal, orderRepeattype, dateOfbuy, deliveryStatus, idPromotion, payment } = req.body
+        const { sumPrice, sumQuantity, repeatType } = OrderHistoryService.getCumulativeAmount(item)
+        const created = await OrderHistoryService.create({ customer, item, orderPriceTotal: sumPrice, orderQuantityTotal: sumQuantity, orderRepeatType: repeatType, dateOfbuy, deliveryStatus, idPromotion, payment })
+       
+        res.status(201).json({
+            success: true,
+            data: created
+        })
+    },
+    updateOrderHistory: async (req, res) =>{
+        const { id } = req.params
+        const { customer, order, orderPriceTotal, dateOfbuy, deliveryStatus, idPromotion, payment } = req.body
+        const updated = await OrderHistoryService.updateOne(id, { customer, order, orderPriceTotal, dateOfbuy, deliveryStatus, idPromotion, payment })
+        
+        res.status(200).json({
+            success: true,
+            data: updated
+        })
+>>>>>>> origin
     },
     deleteOrderHistoryById: async (req, res) => {
         try {
@@ -106,7 +133,3 @@ const OrderHistoryController = {
     },
 }
 export default OrderHistoryController
-
-// const orderQuantityTotal = OrderHistoryService.getQuantityCal(item)
-        // const orderRepeatType = OrderHistoryService.getRepeatType(item)
-        //const order = await OrderItemService.getOne( idOrder )
