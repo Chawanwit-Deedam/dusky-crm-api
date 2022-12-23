@@ -85,11 +85,11 @@ const OrderHistorySchema = new Schema({
 	payment: {
 		type: String,
 		required: true
-	},
-	memberShip: {
-		type: Array,
-		required: true
 	}
+	// memberShip: {
+	// 	type: Array,
+	// 	required: true
+	// }
 
 
 }, { timestamps: true })
