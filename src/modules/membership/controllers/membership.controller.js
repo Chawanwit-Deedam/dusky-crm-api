@@ -20,8 +20,8 @@ const MembershipController = {
 
     createMembership: async (req, res) => {
         ///const id = req.body.id
-        const { memberShipName, memberShipQuantity, memberShipPrice } = req.body
-        const created = await MembershipService.create({ memberShipName, memberShipQuantity, memberShipPrice })
+        const { memberShipName, memberShipColor, memberShipQuantity, memberShipPrice } = req.body
+        const created = await MembershipService.create({ memberShipName, memberShipColor, memberShipQuantity, memberShipPrice })
     
         res.status(201).json({
             success: true,
@@ -30,8 +30,8 @@ const MembershipController = {
     },
     updateMembership: async (req, res) =>{
         const { id } = req.params
-        const { memberShipName, memberShipQuantity, memberShipPrice } = req.body
-        const updated = await MembershipService.updateOne(id, { memberShipName, memberShipQuantity, memberShipPrice })
+        const { memberShipName, memberShipColor, memberShipQuantity, memberShipPrice } = req.body
+        const updated = await MembershipService.updateOne(id, { memberShipName, memberShipColor, memberShipQuantity, memberShipPrice })
         
         res.status(200).json({
             success: true,

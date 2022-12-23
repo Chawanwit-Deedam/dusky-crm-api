@@ -26,7 +26,7 @@ const CustomerController = {
             success: true,
             data: {
                 customer: customerlevelMember,
-                level: levelCustomer
+                detail: levelCustomer
             }
         })
     },

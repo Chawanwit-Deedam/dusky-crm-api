@@ -8,6 +8,10 @@ const MembershipSchema = new Schema({
         type: String,
         required: true
     },
+    memberShipColor:{
+        type: String,
+        required: true
+    },
     memberShipQuantity:{
         type: Number,
         required: true
