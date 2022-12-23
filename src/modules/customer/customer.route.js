@@ -15,6 +15,10 @@ CustomerRouter.get('/', CustomerController.getCustomer)
 CustomerRouter.get('/level', CustomerController.getCustomerLevel)
 
 CustomerRouter.get('/:id', CustomerController.getCustomerById)
+
+
+CustomerRouter.get('/customerLevel/:id', CustomerController.getCustomerLevel)
+
 CustomerRouter.post('/', validator.body(CreateCustomerDto), CustomerController.createCustomer)
 CustomerRouter.put('/:id', validator.body(UpdateCustomerDto), CustomerController.updateCustomer)
 CustomerRouter.delete('/', validator.body(DeleteCustomerDto), CustomerController.deleteCustomerById)

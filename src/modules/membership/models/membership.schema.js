@@ -18,9 +18,7 @@ const MembershipSchema = new Schema({
     }
 }, 
 {
-    timestamps: false,
-    _id: false,
-    strict: true
+    timestamps: false
 })
 
 const MembershipModel = model('memberships', MembershipSchema)

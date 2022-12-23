@@ -1,7 +1,7 @@
 import OrderHistoryService from '../services/orderHistory.service.js'
 
 const OrderHistoryController = {
-    getOrderHistory: async (req, res) => {
+    getOrderHistory: async (req, res) =>{
         const orderHistory = await OrderHistoryService.getAll()
 
         res.status(200).json({
@@ -35,31 +35,22 @@ const OrderHistoryController = {
             console.log(error)
         }
     },
-    getLevelAll: async (req, res) => {
-        //const { id } = req.params
-        const levelMember = await OrderHistoryService.getLevel()
-        
-        res.status(200).json({
-            success: true,
-            data: levelMember
-        })
-    },
     createOrderHistory: async (req, res) => {
-        
+    
         const { customer, item, orderQuantitytotal, orderPricetotal, orderRepeattype, dateOfbuy, deliveryStatus, idPromotion, payment } = req.body
         const { sumPrice, sumQuantity, repeatType } = OrderHistoryService.getCumulativeAmount(item)
         const created = await OrderHistoryService.create({ customer, item, orderPriceTotal: sumPrice, orderQuantityTotal: sumQuantity, orderRepeatType: repeatType, dateOfbuy, deliveryStatus, idPromotion, payment })
-        
+       
         res.status(201).json({
             success: true,
             data: created
         })
     },
-    updateOrderHistory: async (req, res) => {
+    updateOrderHistory: async (req, res) =>{
         const { id } = req.params
         const { customer, order, orderPriceTotal, dateOfbuy, deliveryStatus, idPromotion, payment } = req.body
         const updated = await OrderHistoryService.updateOne(id, { customer, order, orderPriceTotal, dateOfbuy, deliveryStatus, idPromotion, payment })
-
+        
         res.status(200).json({
             success: true,
             data: updated
@@ -76,7 +67,3 @@ const OrderHistoryController = {
     },
 }
 export default OrderHistoryController
-
-// const orderQuantityTotal = OrderHistoryService.getQuantityCal(item)
-        // const orderRepeatType = OrderHistoryService.getRepeatType(item)
-        //const order = await OrderItemService.getOne( idOrder )

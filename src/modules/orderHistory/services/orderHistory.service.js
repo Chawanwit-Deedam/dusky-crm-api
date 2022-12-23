@@ -11,7 +11,7 @@ const OrderHistoryService = {
         return OrderHistoryModel.find(query)
     },
     getCumulativeAmount: (item) => {
-        if (Array.isArray(item)) {
+        if (Array.isArray(item) && item[0].typeItem) {
             let priceTotal = Array()
             let sumPrice = 0
             let sumQuantity = 0
@@ -21,7 +21,7 @@ const OrderHistoryService = {
                 sumPrice += item[i].priceItem * item[i].quantityItem
                 sumQuantity += item[i].quantityItem
                 if (item[i].typeItem) {
-                    repeatType.push(item[i].typeItem)
+                    repeatType.push(item[i].typeItem)       
                 }
             }
             // sum = item.reduce((acc, curr) => {
@@ -150,52 +150,3 @@ const OrderHistoryService = {
 }
 
 export default OrderHistoryService
-
-
-// let C = []
-        // let D = []
-        // let sum 
-        // let oneitem = 0
-        // for (let i = 0; i < B.length; i++) {
-        //     D.push(allItem.filter(item => item.nameItem === B[i]))
-        //     sum = D[i].quantityItem
-        //     if(B[i] === D[i].nameItem){
-        //          sum = D.length
-        //     }
-        // }
-
-        // if(allItem.length > 0){
-        //     for (let x = 0; x < allItem.length; x++) {
-        //         if(allItem[x].nameItem === A[i].nameItem){
-        //             break
-        //         }
-
-        //     }
-        // } else if(allItem.length == 0){
-        //     allItem.push({
-        //         nameItem: A[i].nameItem,
-        //         quantityItem: A[i].quantityItem
-        //     })
-        // }
-        // if (i > 0) {
-        //      for (let j = 0; j < allItem.length; j++) {
-        //         if(allItem[j] !== A[i].nameItem){
-        //             allItem.push({
-        //                 nameItem: A[i].nameItem
-        //             })
-        //         }
-        //      }
-        // }
-        // allItem.push({
-        //     nameItem: A[i].nameItem
-        // })
-
-        // for (let i = 0; i < customerId.length; i++) {
-        //     if(customerId[i].typeItem){
-        //         allItem.push(item[i].typeItem)
-        //     }    
-        // }
-        // for (let i = 0; i < customerId.length; i++) {
-        //     count += 1
-        // }
-        //const CCC = customerId.dateOfbuy

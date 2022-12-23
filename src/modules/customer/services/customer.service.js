@@ -12,6 +12,13 @@ const CustomerService = {
     getOne:(id) => {
         return CustomerModel.findOne({ _id: id })
     },
+
+    getIdCustomerLevel: async (id) => {
+        const customerModel = await CustomerModel.findOne({ _id: id })
+
+        return {customerModel}
+
+    },
     updateOne: (id, payload) => {
         return CustomerModel.findOneAndUpdate({ _id: id }, { $set: payload})
     },
