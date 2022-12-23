@@ -30,7 +30,7 @@ const OrderHistoryController = {
             data: orderHistory
         })
     },
-    getLevelAll: async (req, res) => {
+    getLevelById: async (req, res) => {
         const { id } = req.params
         const levelMember = await OrderHistoryService.getLevel(id)
         

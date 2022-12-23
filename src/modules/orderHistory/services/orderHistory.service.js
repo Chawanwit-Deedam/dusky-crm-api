@@ -20,7 +20,7 @@ const OrderHistoryService = {
                 sumPrice += item[i].priceItem * item[i].quantityItem
                 sumQuantity += item[i].quantityItem
                 if (item[i].typeItem) {
-                    repeatType.push(item[i].typeItem)
+                    repeatType.push(item[i].typeItem)       
                 }
             }
             // sum = item.reduce((acc, curr) => {
@@ -34,7 +34,6 @@ const OrderHistoryService = {
         return OrderHistoryModel.findOne({ _id: id })
     },
     getRepeat: async (id) => {
-
         const customerId = await OrderHistoryModel.find({ 'customer.idCustomer': id })
         let count = customerId.length
         //customer
@@ -112,7 +111,7 @@ const OrderHistoryService = {
             }
             const levelCustomer = await MembershipModel.find(query)
             const countLevelMemberShip = levelCustomer.length
-    
+            const customerById = idCustomer[0].customer 
             for(let j=0; j < levelCustomer.length; j++){
                 if(levelCustomer[j].memberShipName){
                     levelMemberShip.push({
@@ -139,7 +138,7 @@ const OrderHistoryService = {
                 break;
               }
             }
-            return { totalquantityItem, totalpriceItem, countLevelMemberShip,levelMemberShip, levelForCustomer}
+            return { customerById, totalquantityItem, totalpriceItem, countLevelMemberShip, levelForCustomer}
         }
         return null
     }, 
