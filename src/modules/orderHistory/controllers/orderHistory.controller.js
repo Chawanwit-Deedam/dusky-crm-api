@@ -18,10 +18,10 @@ const OrderHistoryController = {
             data: orderHistory
         })
     },
-    getOrderHistoryByIdRepeat: async (req, res) => {
+    getOrderHistoryByIdReport: async (req, res) => {
         try {
             const { id } = req.params
-            const orderHistory = await OrderHistoryService.getRepeat(id)
+            const orderHistory = await OrderHistoryService.getReport(id)
 
             res.status(200).json({
                 success: true,
@@ -36,8 +36,8 @@ const OrderHistoryController = {
         }
     },
     getLevelAll: async (req, res) => {
-        const { id } = req.params
-        const levelMember = await OrderHistoryService.getLevel(id)
+        //const { id } = req.params
+        const levelMember = await OrderHistoryService.getLevel()
         
         res.status(200).json({
             success: true,
