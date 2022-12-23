@@ -1,4 +1,4 @@
-  import mongoose from '../../../common/database/mongoose.db.js'
+import mongoose from '../../../common/database/mongoose.db.js'
 
 
 const { Schema, model} = mongoose

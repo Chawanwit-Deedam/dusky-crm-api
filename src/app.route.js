@@ -6,6 +6,7 @@ import PromotionRouter from './modules/promotion/promotion.route.js'
 import OrderHistoryRouter from './modules/orderHistory/orderHistory.route.js'
 import CampaignRouter from './modules/campaign/campaign.route.js'
 import OrderItemRouter from './modules/orderItem/orderItem.route.js'
+import EmployeeRouter from './modules/employee/employee.route.js'
 
 const AppRouter = express()
 
@@ -16,6 +17,7 @@ AppRouter.use('/promotion', PromotionRouter)
 AppRouter.use('/orderHistory', OrderHistoryRouter)
 AppRouter.use('/campaign', CampaignRouter)
 AppRouter.use('/orderItem', OrderItemRouter)
+AppRouter.use('/employee', EmployeeRouter)
 
 
 export default AppRouter
