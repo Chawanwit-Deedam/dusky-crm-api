@@ -5,15 +5,23 @@ const { Schema, model} = mongoose
 
 
 const AddressSchema = new Schema({
-    subDistrict:{
+    province:{
         type: String,
-        require: true
+        required: true
     },
     district:{
         type: String,
         required: true
     },
-    province:{
+    subDistrict:{
+        type: String,
+        require: true
+    },
+    homeAddress:{
+        type: String,
+        required: true
+    },
+    postcode:{
         type: String,
         required: true
     }
@@ -25,14 +33,6 @@ const AddressSchema = new Schema({
 })
 
 const CustomerSchema = new Schema({
-    username:{
-        type: String,
-        required: true
-    },
-    password:{
-        type: String,
-        required: true
-    },
     profileImageUrl:{
         type: String,
         required: true
@@ -45,15 +45,19 @@ const CustomerSchema = new Schema({
         type: String,
         required: true
     },
-    sex:{
+    phoneNumber:{
         type: String,
         required: true
     },
+    email:{
+        type: String,
+        required: true
+    }, 
     dateOfBirth:{
         type: Date,
         required: true
     },
-    phoneNumber:{
+    sex:{
         type: String,
         required: true
     },
@@ -61,10 +65,6 @@ const CustomerSchema = new Schema({
         type: AddressSchema,
         required: true
     },
-    email:{
-        type: String,
-        required: true
-    }, 
     job: {
         type: String,
         required: true
@@ -73,11 +73,23 @@ const CustomerSchema = new Schema({
         type: Number,
         required: true
     },
+    lineId:{
+        type: String,
+        required: true
+    },
     facebook: {
         type: String,
         required: true
     },
     instagram: {
+        type: String,
+        required: true
+    },
+    username:{
+        type: String,
+        required: true
+    },
+    password:{
         type: String,
         required: true
     }
