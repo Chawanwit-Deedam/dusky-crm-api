@@ -64,8 +64,6 @@ const CustomerService = {
 
           showCustomer.push({
             oneCustomer,
-            //totalquantityItem,
-            //totalpriceItem,
             levelForCustomer
 
           })
