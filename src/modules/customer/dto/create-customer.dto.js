@@ -18,13 +18,11 @@ export const CreateCustomerDto = Joi.object({
         postcode: Joi.string().required(),
     }),
     job: Joi.string().required(),
-    income: Joi.number().optional().default(0),
+    income: Joi.number().required(),
     lineId: Joi.string().required(),
     facebook: Joi.string().required(),
-    instagram: Joi.string().optional(),
-    username: Joi.string().optional(),
-    password: Joi.string().optional(),
-    dateOfCreat: Joi.date().default(now)
-
+    instagram: Joi.string().required(),
+    username: Joi.string().required(),
+    password: Joi.string().required()
 
 })

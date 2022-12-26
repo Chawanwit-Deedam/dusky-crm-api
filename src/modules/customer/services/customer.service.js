@@ -15,7 +15,6 @@ const CustomerService = {
 
     getIdCustomerLevel: async (id) => {
         const customerModel = await CustomerModel.findOne({ _id: id })
-        
         return {customerModel}
 
     },
