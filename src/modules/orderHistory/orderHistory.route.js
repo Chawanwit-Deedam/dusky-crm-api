@@ -18,6 +18,6 @@ OrderHistoryRouter.get('/Report/:id', OrderHistoryController.getOrderHistoryById
 OrderHistoryRouter.get('/:id', OrderHistoryController.getOrderHistoryById)
 OrderHistoryRouter.post('/', validator.body(CreateOrderHistoryDto), OrderHistoryController.createOrderHistory)
 OrderHistoryRouter.put('/:id', validator.body(UpdateOrderHistoryDto), OrderHistoryController.updateOrderHistory)
-OrderHistoryRouter.delete('/', validator.body(DeleteOrderHistoryDto), OrderHistoryController.deleteOrderHistoryById)
+OrderHistoryRouter.delete('/:id', validator.body(DeleteOrderHistoryDto), OrderHistoryController.deleteOrderHistoryById)
 
 export default OrderHistoryRouter
