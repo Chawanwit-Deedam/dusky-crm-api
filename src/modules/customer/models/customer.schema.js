@@ -1,6 +1,5 @@
 import mongoose from '../../../common/database/mongoose.db.js'
 
-
 const { Schema, model} = mongoose
 
 
@@ -24,7 +23,11 @@ const AddressSchema = new Schema({
     postcode:{
         type: String,
         required: true
-    }
+    },
+    postcode:{
+        type: String,
+        require: true
+    },
 }, 
 {
     timestamps: false,

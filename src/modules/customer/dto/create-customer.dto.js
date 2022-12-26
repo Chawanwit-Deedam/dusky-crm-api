@@ -1,4 +1,5 @@
 import Joi from 'joi'
+import { now } from 'mongoose'
 
 export const CreateCustomerDto = Joi.object({
     id: Joi.string().optional(),
