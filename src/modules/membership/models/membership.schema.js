@@ -1,10 +1,14 @@
-  import mongoose from '../../../common/database/mongoose.db.js'
+import mongoose from '../../../common/database/mongoose.db.js'
 
 
 const { Schema, model} = mongoose
 
 const MembershipSchema = new Schema({
     memberShipName:{
+        type: String,
+        required: true
+    },
+    memberShipColor:{
         type: String,
         required: true
     },

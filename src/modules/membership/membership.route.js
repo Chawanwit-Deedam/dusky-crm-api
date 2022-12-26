@@ -15,6 +15,6 @@ MembershipRouter.get('/', MembershipController.getMembership)
 MembershipRouter.get('/:id', MembershipController.getMembershipById)
 MembershipRouter.post('/', validator.body(CreateMembershipDto), MembershipController.createMembership)
 MembershipRouter.put('/:id', validator.body(UpdateMembershipDto), MembershipController.updateMembership)
-MembershipRouter.delete('/', validator.body(DeleteMembershipDto), MembershipController.deleteMembershipById)
+MembershipRouter.delete('/:id', validator.body(DeleteMembershipDto), MembershipController.deleteMembershipById)
 
 export default MembershipRouter
