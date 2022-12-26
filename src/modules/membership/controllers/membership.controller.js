@@ -36,8 +36,8 @@ const MembershipController = {
 
     createMembership: async (req, res) => {
         try {
-            const { memberShipName, memberShipQuantity, memberShipPrice } = req.body
-            const created = await MembershipService.create({ memberShipName, memberShipQuantity, memberShipPrice })
+            const { memberShipName, memberShipColor, memberShipQuantity, memberShipPrice } = req.body
+            const created = await MembershipService.create({ memberShipName, memberShipColor, memberShipQuantity, memberShipPrice })
 
             res.status(201).json({
                 success: true,

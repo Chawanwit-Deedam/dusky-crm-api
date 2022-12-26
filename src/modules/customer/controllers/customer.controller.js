@@ -1,5 +1,4 @@
 import CustomerService from '../services/customer.service.js'
-import OrderHistoryService from '../../orderHistory/services/orderHistory.service.js'
 const CustomerController = {
     getCustomer: async (req, res) =>{
         const customer = await CustomerService.getAll()
@@ -20,14 +19,11 @@ const CustomerController = {
 
     getCustomerLevel: async (req, res) => {
         const { id } = req.params
-        const customerlevelMember = await CustomerService.getIdCustomerLevel(id)
-        const levelCustomer = await OrderHistoryService.getLevel(id)
+        const customerlevelMember = await CustomerService.getLevel()
+        //const levelCustomer = await OrderHistoryService.getLevel(id)
         res.status(200).json({
             success: true,
-            data: {
-                customer: customerlevelMember,
-                detail: levelCustomer
-            }
+            data: customerlevelMember
         })
     },
 

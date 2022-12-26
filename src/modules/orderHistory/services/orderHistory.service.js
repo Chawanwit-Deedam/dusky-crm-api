@@ -39,6 +39,9 @@ const OrderHistoryService = {
       let customerId = await OrderHistoryModel.find( { 'customer.idCustomer': _id } )
       let customerModel = await CustomerModel.findOne( { _id } )
       let levelMemberShip = await MembershipModel.find()
+      let level = levelMemberShip.sort(function (a, b) {
+        return a.memberShipQuantity - b.memberShipQuantity
+      });
       const cusomerNoOrder = {
         firstName: customerModel.firstName,
         lastName: customerModel.lastName,
@@ -115,20 +118,20 @@ const OrderHistoryService = {
           }
 
           let levelForCustomer 
-          for(let i=0; i < levelMemberShip.length; i++){
-            if(totalquantityItem >= levelMemberShip[i].memberShipQuantity && totalpriceItem >= levelMemberShip[i].memberShipPrice){
-                levelForCustomer=levelMemberShip[i].memberShipName
+          for(let i=0; i < level.length; i++){
+            if(totalquantityItem >= level[i].memberShipQuantity && totalpriceItem >= level[i].memberShipPrice){
+                levelForCustomer=level[i].memberShipName
             }
-            else if(totalquantityItem >= levelMemberShip[i].memberShipQuantity && totalpriceItem <= levelMemberShip[i].memberShipPrice){
-              levelForCustomer=levelMemberShip[i].memberShipName 
+            else if(totalquantityItem >= level[i].memberShipQuantity && totalpriceItem <= level[i].memberShipPrice){
+              levelForCustomer=level[i].memberShipName 
               break;
             }
-            else if(totalquantityItem <= levelMemberShip[i].memberShipQuantity && totalpriceItem >= levelMemberShip[i].memberShipPrice){
-              levelForCustomer=levelMemberShip[i].memberShipName
+            else if(totalquantityItem <= level[i].memberShipQuantity && totalpriceItem >= level[i].memberShipPrice){
+              levelForCustomer=level[i].memberShipName
               break;
             }
-            else if(totalquantityItem <= levelMemberShip[i].memberShipQuantity && totalpriceItem <= levelMemberShip[i].memberShipPrice){
-              levelForCustomer=levelMemberShip[i].memberShipName
+            else if(totalquantityItem <= level[i].memberShipQuantity && totalpriceItem <= level[i].memberShipPrice){
+              levelForCustomer=level[i].memberShipName
               break;
             }
           }

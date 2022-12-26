@@ -86,15 +86,15 @@ const CustomerSchema = new Schema({
     },
     instagram: {
         type: String,
-        required: true
+        required: false
     },
     username:{
         type: String,
-        required: true
+        required: false
     },
     password:{
         type: String,
-        required: true
+        required: false
     }
 
 
