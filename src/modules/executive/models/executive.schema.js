@@ -22,11 +22,7 @@ const AddressSchema = new Schema({
     postcode:{
         type: String,
         required: true
-    },
-    postcode:{
-        type: String,
-        require: true
-    },
+    }
 }, 
 {
     timestamps: false,
@@ -66,6 +62,6 @@ const ExecutiveSchema = new Schema({
   
   }, { timestamps: true })
   
-  const ExecutiveModel = model('employees', ExecutiveSchema)
+  const ExecutiveModel = model('executive', ExecutiveSchema)
   
   export default ExecutiveModel

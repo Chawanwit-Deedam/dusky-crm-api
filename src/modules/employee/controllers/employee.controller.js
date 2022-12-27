@@ -1,4 +1,5 @@
 import EmployeeService from '../services/employee.service.js'
+
 const EmployeeController = {
     getEmployee: async (req, res) =>{
         const employee = await EmployeeService.getAll()
@@ -19,7 +20,6 @@ const EmployeeController = {
     },
 
     createEmployee: async (req, res) => {
-        ///const id = req.body.id
         const { username, password, firstname, lastname, phoneNumber, email, department } = req.body
         const created = await EmployeeService.create({ username, password, firstname, lastname, phoneNumber, email, department })
     

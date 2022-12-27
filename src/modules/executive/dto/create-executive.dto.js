@@ -1,6 +1,6 @@
 import Joi from 'joi'
 
-export const CreateEmployeeDto = Joi.object({
+export const CreateExecutiveDto = Joi.object({
     id: Joi.string().optional(),
     username: Joi.string().required(),
     password: Joi.string().required(),
@@ -8,5 +8,11 @@ export const CreateEmployeeDto = Joi.object({
     email: Joi.string().required(),
     phoneNumber: Joi.string().required(),
     businessType: Joi.string().required(),
-    address: Joi.string().required()
+    address: ({
+        province: Joi.string().required(),
+        district: Joi.string().required(),
+        subDistrict: Joi.string().required(),
+        homeAddress: Joi.string().required(),
+        postcode: Joi.string().required()
+    })
 })
