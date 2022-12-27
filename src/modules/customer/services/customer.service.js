@@ -15,7 +15,6 @@ const CustomerService = {
 
     getIdCustomerLevel: async (id) => {
         const customerModel = await CustomerModel.findOne({ _id: id })
-        
         return {customerModel}
 
     },
@@ -27,8 +26,11 @@ const CustomerService = {
     },
     getLevel: async ( query = {} ) => {
         const allCustomer = await CustomerModel.find( )
-        const levelCustomer = await MembershipModel.find( )
-        
+        const levelCustomer = await MembershipModel.find()
+        const level = levelCustomer.sort(function (a, b) {
+          return a.memberShipQuantity - b.memberShipQuantity;
+        })
+    
         let idCustomer
         let levelForCustomer
         //return allCustomer.length
@@ -43,27 +45,30 @@ const CustomerService = {
             totalquantityItem += idCustomer[i].orderQuantityTotal
             totalpriceItem += idCustomer[i].orderPriceTotal
           }
-          
-          for(let i=0; i < levelCustomer.length; i++){
-            if(totalquantityItem >= levelCustomer[i].memberShipQuantity && totalpriceItem >= levelCustomer[i].memberShipPrice){
-              levelForCustomer=levelCustomer[i].memberShipName
+          //return level
+          for(let i=0; i < level.length; i++){
+            if(totalquantityItem >= level[i].memberShipQuantity && totalpriceItem >= level[i].memberShipPrice){
+              levelForCustomer=level[i].memberShipName
+              
             }
-            else if(totalquantityItem >= levelCustomer[i].memberShipQuantity && totalpriceItem <= levelCustomer[i].memberShipPrice){
-              levelForCustomer=levelCustomer[i].memberShipName 
+            else if(totalquantityItem >= level[i].memberShipQuantity && totalpriceItem <= level[i].memberShipPrice){
+              levelForCustomer=level[i].memberShipName 
               break;
             }
-            else if(totalquantityItem <= levelCustomer[i].memberShipQuantity && totalpriceItem >= levelCustomer[i].memberShipPrice){
-              levelForCustomer=levelCustomer[i].memberShipName
+            else if(totalquantityItem <= level[i].memberShipQuantity && totalpriceItem >= level[i].memberShipPrice){
+              levelForCustomer=level[i].memberShipName
               break;
             }
-            else if(totalquantityItem <= levelCustomer[i].memberShipQuantity && totalpriceItem <= levelCustomer[i].memberShipPrice){
-              levelForCustomer=levelCustomer[i].memberShipName
+            else if(totalquantityItem <= level[i].memberShipQuantity && totalpriceItem <= level[i].memberShipPrice){
+              levelForCustomer=level[i].memberShipName
               break;
             }
           }
 
           showCustomer.push({
             oneCustomer,
+            totalquantityItem,
+            totalpriceItem,
             levelForCustomer
 
           })

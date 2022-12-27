@@ -21,6 +21,6 @@ CustomerRouter.get('/customerLevel/:id', CustomerController.getCustomerLevel)
 
 CustomerRouter.post('/', validator.body(CreateCustomerDto), CustomerController.createCustomer)
 CustomerRouter.put('/:id', validator.body(UpdateCustomerDto), CustomerController.updateCustomer)
-CustomerRouter.delete('/', validator.body(DeleteCustomerDto), CustomerController.deleteCustomerById)
+CustomerRouter.delete('/:id', validator.body(DeleteCustomerDto), CustomerController.deleteCustomerById)
 
 export default CustomerRouter

@@ -1,5 +1,5 @@
 import Joi from 'joi'
 
-export const DeleteCustomerDto = Joi.object({
+export const DeleteCouponDto = Joi.object({
   id: Joi.string().optional()
 })

@@ -22,6 +22,10 @@ const AddressSchema = new Schema({
     },
     postcode:{
         type: String,
+        required: true
+    },
+    postcode:{
+        type: String,
         require: true
     },
 }, 
@@ -72,7 +76,7 @@ const CustomerSchema = new Schema({
         type: Number,
         required: true
     },
-    lineId: {
+    lineId:{
         type: String,
         required: true
     },
@@ -91,10 +95,6 @@ const CustomerSchema = new Schema({
     password:{
         type: String,
         required: false
-    },
-    dateOfCreat:{
-        type: Date,
-        default: Date.now()
     }
 
 
