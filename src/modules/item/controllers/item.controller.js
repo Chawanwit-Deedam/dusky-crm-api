@@ -36,8 +36,8 @@ const ItemController = {
 
     createItem: async (req, res) => {
         try {
-            const { itemName, itemPrice, itemQuantity, itemType } = req.body
-            const created = await ItemService.create({ itemName, itemPrice, itemQuantity, itemType })
+            const { itemImageUrl, itemName, itemPrice, itemType } = req.body
+            const created = await ItemService.create({ itemImageUrl, itemName, itemPrice, itemType })
 
             res.status(201).json({
                 success: true,
@@ -56,8 +56,8 @@ const ItemController = {
     updateItem: async (req, res) => {
         try {
             const { id } = req.params
-            const { itemName, itemPrice, itemQuantity, itemType } = req.body
-            const updated = await ItemService.updateOne(id, { itemName, itemPrice, itemQuantity, itemType })
+            const { itemImageUrl, itemName, itemPrice, itemType } = req.body
+            const updated = await ItemService.updateOne(id, { itemImageUrl, itemName, itemPrice, itemType })
 
             res.status(200).json({
                 success: true,
@@ -73,7 +73,7 @@ const ItemController = {
     },
     deleteItemById: async (req, res) => {
         try {
-            const { id } = req.body
+            const { id } = req.params
             const item = await ItemService.deleteOne(id)
 
             res.status(200).json({

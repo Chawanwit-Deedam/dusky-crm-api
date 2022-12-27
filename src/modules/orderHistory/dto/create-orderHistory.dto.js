@@ -15,12 +15,6 @@ export const CreateOrderHistoryDto = Joi.object({
         priceItem: Joi.number().required(),  
         typeItem: Joi.string().required()
     }),
-    // order: {
-    //     idItem: Joi.string().required(),
-    //     nameItem: Joi.string().required(),
-    //     quantityItem: Joi.number().required(),
-    //     priceItem: Joi.number().required()
-    // },
     orderQuantityTotal: Joi.number().optional(),
     orderPriceTotal: Joi.number().optional(),
     orderRepeatType: Joi.array().optional(),

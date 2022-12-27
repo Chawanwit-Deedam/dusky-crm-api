@@ -1,42 +1,38 @@
 import mongoose from '../../../common/database/mongoose.db.js'
 
-const { Schema, model} = mongoose
+const { Schema, model } = mongoose
 
 const EmployeeSchema = new Schema({
-    username:{
-        type: String,
-        required: true
-    },
-    password:{
-        type: String,
-        required: true
-    },
-    firstname:{
-      type: String,
-      required: true
-    }, 
-    lastname:{
-      type: String,
-      required: true
-    },
-    phoneNumber:{
-      type: String,
-      required: true
-    },
-    email:{
-      type: String,
-      required: true 
-    },
-    department:{
-      type: String,
-      required: true
-    },
-    access:{
-      type: Array,
-      required: true
-    }
+  firstname: {
+    type: String,
+    required: true
+  },
+  lastname: {
+    type: String,
+    required: true
+  },
+  phoneNumber: {
+    type: String,
+    required: true
+  },
+  email: {
+    type: String,
+    required: true
+  },
+  username: {
+    type: String,
+    required: true
+  },
+  password: {
+    type: String,
+    required: true
+  },
+  department: {
+    type: String,
+    required: true
+  }
 
-}, {timestamps: true })
+}, { timestamps: true })
 
 const EmployeeModel = model('employees', EmployeeSchema)
 

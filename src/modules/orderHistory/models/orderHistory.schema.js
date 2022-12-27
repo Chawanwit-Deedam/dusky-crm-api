@@ -77,10 +77,6 @@ const OrderHistorySchema = new Schema({
 		type: String,
 		required: true
 	}
-	// memberShip: {
-	// 	type: Array,
-	// 	required: true
-	// }
 
 
 }, { timestamps: true })

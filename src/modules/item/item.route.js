@@ -15,6 +15,6 @@ ItemRouter.get('/', ItemController.getItem)
 ItemRouter.get('/:id', ItemController.getItemById)
 ItemRouter.post('/', validator.body(CreateItemDto), ItemController.createItem)
 ItemRouter.put('/:id', validator.body(UpdateItemDto), ItemController.updateItem)
-ItemRouter.delete('/', validator.body(DeleteItemDto), ItemController.deleteItemById)
+ItemRouter.delete('/:id', validator.body(DeleteItemDto), ItemController.deleteItemById)
 
 export default ItemRouter

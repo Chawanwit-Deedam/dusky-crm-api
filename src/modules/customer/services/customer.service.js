@@ -12,12 +12,6 @@ const CustomerService = {
     getOne:(id) => {
         return CustomerModel.findOne({ _id: id })
     },
-
-    getIdCustomerLevel: async (id) => {
-        const customerModel = await CustomerModel.findOne({ _id: id })
-        return {customerModel}
-
-    },
     updateOne: (id, payload) => {
         return CustomerModel.findOneAndUpdate({ _id: id }, { $set: payload})
     },
@@ -25,56 +19,56 @@ const CustomerService = {
         return CustomerModel.deleteOne({_id: id})
     },
     getLevel: async ( query = {} ) => {
-        const allCustomer = await CustomerModel.find( )
-        const levelCustomer = await MembershipModel.find()
-        const level = levelCustomer.sort(function (a, b) {
-          return a.memberShipQuantity - b.memberShipQuantity;
-        })
-    
-        let idCustomer
-        let levelForCustomer
-        //return allCustomer.length
-        let showCustomer = Array()
-        for (let i = 0; i < allCustomer.length; i++) {
-          idCustomer = await OrderHistoryModel.find({ 'customer.idCustomer': allCustomer[i]._id })
-          let oneCustomer = allCustomer[i]
-          let totalquantityItem = 0
-          let totalpriceItem = 0
+      const allCustomer = await CustomerModel.find()
+      const levelCustomer = await MembershipModel.find()
+      const level = levelCustomer.sort(function (a, b) {
+        return a.memberShipQuantity - b.memberShipQuantity;
+      })
+  
+      let idCustomer
+      let levelForCustomer
+      //return allCustomer.length
+      let showCustomer = Array()
+      for (let i = 0; i < allCustomer.length; i++) {
+        idCustomer = await OrderHistoryModel.find({ 'customer.idCustomer': allCustomer[i]._id })
+        let oneCustomer = allCustomer[i]
+        let totalquantityItem = 0
+        let totalpriceItem = 0
 
-          for (let i = 0; i < idCustomer.length; i++) {
-            totalquantityItem += idCustomer[i].orderQuantityTotal
-            totalpriceItem += idCustomer[i].orderPriceTotal
-          }
-          //return level
-          for(let i=0; i < level.length; i++){
-            if(totalquantityItem >= level[i].memberShipQuantity && totalpriceItem >= level[i].memberShipPrice){
-              levelForCustomer=level[i].memberShipName
-              
-            }
-            else if(totalquantityItem >= level[i].memberShipQuantity && totalpriceItem <= level[i].memberShipPrice){
-              levelForCustomer=level[i].memberShipName 
-              break;
-            }
-            else if(totalquantityItem <= level[i].memberShipQuantity && totalpriceItem >= level[i].memberShipPrice){
-              levelForCustomer=level[i].memberShipName
-              break;
-            }
-            else if(totalquantityItem <= level[i].memberShipQuantity && totalpriceItem <= level[i].memberShipPrice){
-              levelForCustomer=level[i].memberShipName
-              break;
-            }
-          }
-
-          showCustomer.push({
-            oneCustomer,
-            totalquantityItem,
-            totalpriceItem,
-            levelForCustomer
-
-          })
+        for (let i = 0; i < idCustomer.length; i++) {
+          totalquantityItem += idCustomer[i].orderQuantityTotal
+          totalpriceItem += idCustomer[i].orderPriceTotal
         }
-          return showCustomer
-      }, 
+        //return level
+        for(let i=0; i < level.length; i++){
+          if(totalquantityItem >= level[i].memberShipQuantity && totalpriceItem >= level[i].memberShipPrice){
+            levelForCustomer=level[i].memberShipName
+            
+          }
+          else if(totalquantityItem >= level[i].memberShipQuantity && totalpriceItem <= level[i].memberShipPrice){
+            levelForCustomer=level[i].memberShipName 
+            break;
+          }
+          else if(totalquantityItem <= level[i].memberShipQuantity && totalpriceItem >= level[i].memberShipPrice){
+            levelForCustomer=level[i].memberShipName
+            break;
+          }
+          else if(totalquantityItem <= level[i].memberShipQuantity && totalpriceItem <= level[i].memberShipPrice){
+            levelForCustomer=level[i].memberShipName
+            break;
+          }
+        }
+
+        showCustomer.push({
+          oneCustomer,
+          totalquantityItem,
+          totalpriceItem,
+          levelForCustomer
+
+        })
+      }
+        return showCustomer
+    }, 
 }
 
 export default CustomerService

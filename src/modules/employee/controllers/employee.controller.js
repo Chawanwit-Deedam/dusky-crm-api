@@ -20,8 +20,8 @@ const EmployeeController = {
 
     createEmployee: async (req, res) => {
         ///const id = req.body.id
-        const { username, password, firstname, lastname, phoneNumber, email, department, access } = req.body
-        const created = await EmployeeService.create({ username, password, firstname, lastname, phoneNumber, email, department, access })
+        const { username, password, firstname, lastname, phoneNumber, email, department } = req.body
+        const created = await EmployeeService.create({ username, password, firstname, lastname, phoneNumber, email, department })
     
         res.status(201).json({
             success: true,
@@ -30,8 +30,8 @@ const EmployeeController = {
     },
     updateEmployee: async (req, res) =>{
         const { id } = req.params
-        const { username, password, firstname, lastname, phoneNumber, email, department, access } = req.body
-        const updated = await EmployeeService.updateOne(id, { username, password, firstname, lastname, phoneNumber, email, department, access })
+        const { username, password, firstname, lastname, phoneNumber, email, department } = req.body
+        const updated = await EmployeeService.updateOne(id, { username, password, firstname, lastname, phoneNumber, email, department })
         
         res.status(200).json({
             success: true,

@@ -4,9 +4,9 @@ export const CreateEmployeeDto = Joi.object({
     id: Joi.string().optional(),
     username: Joi.string().required(),
     password: Joi.string().required(),
-    firstname: Joi.string().required(),
-    lastname: Joi.string().required(),
-    phoneNumber: Joi.string().required(),
+    passwordConfirm: Joi.string().required(),
     email: Joi.string().required(),
-    department: Joi.string().required()
+    phoneNumber: Joi.string().required(),
+    businessType: Joi.string().required(),
+    address: Joi.string().required()
 })

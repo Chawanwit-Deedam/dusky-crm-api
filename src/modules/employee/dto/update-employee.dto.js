@@ -7,7 +7,6 @@ export const UpdateEmployeeDto = Joi.object({
   lastname: Joi.string().required(),
   phoneNumber: Joi.string().required(),
   email: Joi.string().required(),
-  department: Joi.string().required(),
-  access: Joi.array().required()
+  department: Joi.string().required()
     
 })
