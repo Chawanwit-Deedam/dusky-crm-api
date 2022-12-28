@@ -9,6 +9,7 @@ import OrderItemRouter from './modules/orderItem/orderItem.route.js'
 import EmployeeRouter from './modules/employee/employee.route.js'
 import CouponRouter from './modules/coupon/coupon.route.js'
 import ExecutiveRouter from './modules/executive/executive.route.js'
+import DashboardRouter from './modules/dashboard/dashboard.route.js'
 
 const AppRouter = express()
 
@@ -22,6 +23,7 @@ AppRouter.use('/orderItem', OrderItemRouter)
 AppRouter.use('/employee', EmployeeRouter)
 AppRouter.use('/coupon', CouponRouter)
 AppRouter.use('/executive', ExecutiveRouter)
+AppRouter.use('/dashboard', DashboardRouter)
 
 
 export default AppRouter

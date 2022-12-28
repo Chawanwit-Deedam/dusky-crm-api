@@ -60,6 +60,6 @@ const CustomerController = {
             success: true,
             data: customer
         })
-    },
+    }
 }
 export default CustomerController
