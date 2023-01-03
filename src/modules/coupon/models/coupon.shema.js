@@ -4,7 +4,7 @@ const { Schema, model} = mongoose
 
 const CouponDiscountSchema = new Schema({
   typeDiscountCoupon:{
-      type: String,
+      type: Boolean,
       require: true
   },
   numberDiscountBath:{
@@ -14,6 +14,97 @@ const CouponDiscountSchema = new Schema({
   numberDiscountPercent:{
       type: Number,
       required: true
+  }
+}, 
+{
+  timestamps: false,
+  _id: false,
+  strict: true
+})
+
+
+
+const CouponTargetPriceTotalSchema = new Schema({
+  value:{
+      type: String,
+      require: true
+  },
+  numberBetween1:{
+      type: Number,
+      required: true
+  },
+  numberBetween2:{
+      type: Number,
+      required: true
+  },
+  numberMoreThan:{
+    type: Number,
+    required: true
+  },
+  numberLessThan:{
+    type: Number,
+    required: true
+  }
+}, 
+{
+  timestamps: false,
+  _id: false,
+  strict: true
+})
+
+
+const CouponTargetAgeSchema = new Schema({
+  value:{
+      type: String,
+      require: true
+  },
+  numberBetween1:{
+      type: Number,
+      required: true
+  },
+  numberBetween2:{
+      type: Number,
+      required: true
+  },
+  numberMoreThan:{
+    type: Number,
+    required: true
+  },
+  numberLessThan:{
+    type: Number,
+    required: true
+  }
+}, 
+{
+  timestamps: false,
+  _id: false,
+  strict: true
+})
+
+
+const CouponTargetGroupSchema = new Schema({
+  targetPriceTotal:{
+      type: CouponTargetPriceTotalSchema,
+      require: true
+  },
+  targetAge:{
+      type: CouponTargetAgeSchema, 
+      required: true
+  },
+  targetSex:{
+      type: Array,
+      required: true
+  },
+  targetDateOfBirth:{
+    type: Array,
+    required: true
+  },
+  targetLevelCustomer:{
+    type: Array,
+    required: true
+  },
+  targetLostUse:{
+    type: Number
   }
 }, 
 {
@@ -36,10 +127,19 @@ const CouponSchema = new Schema({
       type: CouponDiscountSchema,
       required: true 
     },
-    couponItemTypeParticipating:{
-      type: Array,
+    couponItemType:{
+      type: String,
       required: true
     },
+    couponMinimumPurchase:{
+      type: Number,
+      required: true
+    },
+    couponTargetGroup:{
+      type: CouponTargetGroupSchema,
+      required: true
+    },
+
     couponNumberCanUse:{
       type: Number,
       required: true

@@ -8,10 +8,10 @@ const OrderHistoryService = {
         return new OrderHistoryModel(payload).save()
     },
     getAll: (query = {}) => {
-        return OrderHistoryModel.find(query)
+        return OrderHistoryModel.find(query)  
     },
     getCumulativeAmount: (item) => {
-        if (Array.isArray(item) && item[0].typeItem) {
+        if (Array.isArray(item) && item[0].typeItem){
             let priceTotal = Array()
             let sumPrice = 0
             let sumQuantity = 0

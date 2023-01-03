@@ -23,11 +23,7 @@ const AddressSchema = new Schema({
     postcode:{
         type: String,
         required: true
-    },
-    postcode:{
-        type: String,
-        require: true
-    },
+    }
 }, 
 {
     timestamps: false,

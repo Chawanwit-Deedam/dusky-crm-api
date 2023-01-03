@@ -1,8 +1,10 @@
 import CouponModel from "../models/coupon.shema.js"
+import CustomerModel from "../../customer/models/customer.schema.js"
 
+import dayjs from "dayjs"
 const CouponService = {
     create: (payload) => {
-        return new CouponModel(payload).save()
+        return new CouponModel(payload).save()  
     },
     getAll:(query = {}) => {
         return CouponModel.find(query)
@@ -10,7 +12,11 @@ const CouponService = {
     getOne:(id) => {
         return CouponModel.findOne({ _id: id })
     },
-    updateOne: (id, payload) => {
+    getCustomerCoupon: async (query = {}) => {
+        const customerModel = await CustomerModel.find(query)
+        return customerModel
+    },
+    updateOne: (id, payload) => { 
         return CouponModel.findOneAndUpdate({ _id: id }, { $set: payload})
     },
     deleteOne:(id) => {

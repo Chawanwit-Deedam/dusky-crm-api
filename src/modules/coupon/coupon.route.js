@@ -12,7 +12,12 @@ const CouponRouter = express.Router()
 const validator = createValidator({})
 
 CouponRouter.get('/', CouponController.getCoupon)
+
 CouponRouter.get('/:id', CouponController.getCouponById)
+CouponRouter.get('/detail/:id', CouponController.getCouponById)
+
+CouponRouter.get('/search-target', CouponController.getSearchTarget)
+
 CouponRouter.post('/', validator.body(CreateCouponDto), CouponController.createCoupon)
 CouponRouter.put('/:id', validator.body(UpdateCouponDto), CouponController.updateCoupon)
 CouponRouter.delete('/:id', validator.body(DeleteCouponDto), CouponController.deleteCouponById)

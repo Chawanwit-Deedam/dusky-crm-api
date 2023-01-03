@@ -1,13 +1,13 @@
 import CustomerModel from '../models/customer.schema.js'
 import MembershipModel from '../../membership/models/membership.schema.js'
 import OrderHistoryModel from '../../orderHistory/models/orderHistory.schema.js'
-
+import dayjs from 'dayjs'
 const CustomerService = {
     create: (payload) => {
         return new CustomerModel(payload).save()
     },
     getAll:(query = {}) => {
-        return CustomerModel.find(query)
+        return CustomerModel.find()
     },
     getOne:(id) => {
         return CustomerModel.findOne({ _id: id })
