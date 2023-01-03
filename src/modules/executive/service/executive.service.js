@@ -15,7 +15,35 @@ const ExecutiveService = {
     },
     deleteOne:(id) => {
         return ExecutiveModel.deleteOne({_id: id})
-    } 
+    },
+    checkID: async ( username, password ) => {
+        let executive = await ExecutiveModel.find()
+        let statusUser = true
+        for (let i = 0; i < executive.length; i++) {
+            if((executive[i].username === username) && (executive[i].password === password)){
+                return statusUser
+            }
+        }
+        return !statusUser
+    },
+    confirmPassword: ( password, passwordConfirm ) => {
+        if ( password === passwordConfirm ) {
+            return true
+
+        } else {
+            return false
+            
+        }
+    },
+    checkPassword: ( Executive, currentPassword ) => {
+        if ( currentPassword === Executive.password ) {
+            return true
+
+        } else {
+            return false
+
+        }
+    }
 }
 
 export default ExecutiveService

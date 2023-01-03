@@ -35,19 +35,19 @@ const ExecutiveSchema = new Schema({
       type: String,
       required: true
     },
-    email: {
-      type: String,
-      required: true
-    },
     password: {
       type: String,
       required: true
     },
-    passwordConfirm: {
+    phoneNumber: {
       type: String,
       required: true
     },
-    phoneNumber: {
+    email: {
+      type: String,
+      required: true
+    },
+    businessName: {
       type: String,
       required: true
     },

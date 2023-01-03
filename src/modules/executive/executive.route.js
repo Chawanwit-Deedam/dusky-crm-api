@@ -9,6 +9,7 @@ const ExecutiveRouter = express.Router()
 const validator = createValidator({})
 
 ExecutiveRouter.get('/', ExecutiveController.getExecutive)
+ExecutiveRouter.get('/check', ExecutiveController.checkExecutiveById)
 ExecutiveRouter.get('/:id', ExecutiveController.getExecutiveById)
 ExecutiveRouter.post('/', validator.body(CreateExecutiveDto), ExecutiveController.createExecutive)
 ExecutiveRouter.put('/:id', validator.body(UpdateExecutiveDto), ExecutiveController.updateExecutive)
